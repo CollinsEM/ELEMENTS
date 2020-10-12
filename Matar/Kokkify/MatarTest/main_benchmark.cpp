@@ -1713,7 +1713,7 @@ int main(int argc, char** argv) {
     // Number of entries for 1D types (by default, it is 2e25)
     // size_t ARRAY_SIZE_1D = 33554432;
     size_t nsize = 64 * 64 * 64 * 64;
-    size_t nsize_3D = 512;
+    size_t nsize_3D = 256;
     size_t ARRAY_SIZE_3D = (nsize_3D * nsize_3D * nsize_3D); 
 
     // Create vector of vectors that will store timings for kernel runs
@@ -1756,11 +1756,11 @@ int main(int argc, char** argv) {
     Kokkos::initialize();
     {
 
-    using policy2D = Kokkos::MDRangePolicy< Kokkos::Rank<2> >;
+    using policy2D = Kokkos::MDRangePolicy< Kokkos::Rank<2,Kokkos::Iterate::Right,Kokkos::Iterate::Right> >;
     policy2D array_type = policy2D({0,0}, {size_i, size_j});
     policy2D matrix_type = policy2D({1,1}, {size_i+1, size_j+1});
     policy2D splice_type = policy2D({0,0}, {size_j, size_k});
-    using policy3D = Kokkos::MDRangePolicy< Kokkos::Rank<3> >;
+    using policy3D = Kokkos::MDRangePolicy< Kokkos::Rank<3,Kokkos::Iterate::Right,Kokkos::Iterate::Left> >;
     policy3D array_type3 = policy3D({0,0,0}, {size_i, size_j, size_k});
     policy3D matrix_type3 = policy3D({1,1,1}, {size_i+1, size_j+1, size_k+1});
     
@@ -2084,12 +2084,12 @@ int main(int argc, char** argv) {
     //       working correctly.
     //       Ideally, we should be able to modify the above FArrayKokkos
     //       objects via the ViewFArrayKokkos objects
-    Kokkos::parallel_for("Initialize (1D VFAK)", nsize, KOKKOS_LAMBDA(const int i) {
-            // Initialize 1D FArrayKokkos objects
-            fak_arr1(i) = arr1_init_val;
-            fak_arr2(i) = arr2_init_val;
-            fak_arr3(i) = arr3_init_val;
-    Kokkos::fence();
+    //Kokkos::parallel_for("Initialize (1D VFAK)", nsize, KOKKOS_LAMBDA(const int i) {
+    //        // Initialize 1D FArrayKokkos objects
+    //        fak_arr1(i) = arr1_init_val;
+    //        fak_arr2(i) = arr2_init_val;
+    //        fak_arr3(i) = arr3_init_val;
+    //Kokkos::fence();
     //*/
     ///*
     // Vector that stores the times taken by the various kernel calls on the
@@ -2769,7 +2769,7 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
          
         Kokkos::parallel_for("Copy (3D FAK)", array_type_STREAM, 
-                         KOKKOS_LAMBDA(const int k, const int j, const int i) {
+                         KOKKOS_LAMBDA(const int i, const int j, const int k) {
                 fak_arr3_3D(i, j, k) = fak_arr1_3D(i, j, k);
                 });
         Kokkos::fence();
@@ -2784,7 +2784,7 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
          
         Kokkos::parallel_for("Scale (3D FAK)", array_type_STREAM, 
-                         KOKKOS_LAMBDA(const int k, const int j, const int i) {
+                         KOKKOS_LAMBDA(const int i, const int j, const int k) {
                 fak_arr2_3D(i, j, k) = (scalar * fak_arr3_3D(i, j, k));
                 });
         Kokkos::fence();
@@ -2799,7 +2799,7 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
          
         Kokkos::parallel_for("Sum (3D FAK)", array_type_STREAM, 
-                         KOKKOS_LAMBDA(const int k, const int j, const int i) {
+                         KOKKOS_LAMBDA(const int i, const int j, const int k) {
                 fak_arr3_3D(i, j, k) = (fak_arr1_3D(i, j, k) + fak_arr2_3D(i, j, k));
                 });
         Kokkos::fence();
@@ -2815,7 +2815,7 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
          
         Kokkos::parallel_for("Triad (3D FAK)", array_type_STREAM, 
-                         KOKKOS_LAMBDA(const int k, const int j, const int i) {
+                         KOKKOS_LAMBDA(const int i, const int j, const int k) {
                 fak_arr1_3D(i, j, k) = (fak_arr2_3D(i, j, k) + (scalar * fak_arr3_3D(i, j, k)));
                 });
         Kokkos::fence();
@@ -2834,8 +2834,8 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
 
         Kokkos::parallel_reduce("Dot product (3D FAK)", array_type_STREAM, 
-                                KOKKOS_LAMBDA(const int k, const int j, 
-                                              const int i, real_t& tmp) {
+                                KOKKOS_LAMBDA(const int i, const int j, 
+                                              const int k, real_t& tmp) {
                 tmp += (fak_arr1_3D(i, j, k) * fak_arr2_3D(i, j, k));
         }, fak_dot_3D_fin_val);
         Kokkos::fence();
@@ -2854,8 +2854,8 @@ int main(int argc, char** argv) {
     real_t fak_dot_3D_err = std::fabs(dot_3D_fin_val - fak_dot_3D_fin_val);
 
     Kokkos::parallel_reduce("arr1 Error (3D FAK)", array_type_STREAM, 
-                            KOKKOS_LAMBDA(const int k, const int j, 
-                                          const int i, real_t& tmp) {
+                            KOKKOS_LAMBDA(const int i, const int j, 
+                                          const int k, real_t& tmp) {
             tmp += (fak_arr1_3D(i, j, k) - arr1_fin_val) >= 0
                    ? (fak_arr1_3D(i, j, k) - arr1_fin_val)
                    : (arr1_fin_val - fak_arr1_3D(i, j, k));
@@ -2865,8 +2865,8 @@ int main(int argc, char** argv) {
     fak_arr1_3D_err /= ARRAY_SIZE_3D;
 
     Kokkos::parallel_reduce("arr2 Error (3D FAK)", array_type_STREAM, 
-                            KOKKOS_LAMBDA(const int k, const int j, 
-                                          const int i, real_t& tmp) {
+                                KOKKOS_LAMBDA(const int i, const int j, 
+                                              const int k, real_t& tmp) {
             tmp += (fak_arr2_3D(i, j, k) - arr2_fin_val) >= 0
                    ? (fak_arr2_3D(i, j, k) - arr2_fin_val)
                    : (arr2_fin_val - fak_arr2_3D(i, j, k));
@@ -2876,8 +2876,8 @@ int main(int argc, char** argv) {
     fak_arr2_3D_err /= ARRAY_SIZE_3D;
 
     Kokkos::parallel_reduce("arr3 Error (3D FAK)", array_type_STREAM, 
-                            KOKKOS_LAMBDA(const int k, const int j, 
-                                          const int i, real_t& tmp) {
+                                KOKKOS_LAMBDA(const int i, const int j, 
+                                              const int k, real_t& tmp) {
             tmp += (fak_arr3_3D(i, j, k) - arr3_fin_val) >= 0
                    ? (fak_arr3_3D(i, j, k) - arr3_fin_val)
                    : (arr3_fin_val - fak_arr3_3D(i, j, k));
@@ -3342,7 +3342,7 @@ int main(int argc, char** argv) {
 
 //#ifdef MMM
     // Perform matrix matrix multiply benchmark
-    int matrix_size = 64 * 64;
+    int matrix_size = 96 * 96;
     int matrix_total_size = (matrix_size * matrix_size);
     auto cak_mat1 = CArrayKokkos <real_t> (matrix_size, matrix_size);
     auto cak_mat2 = CArrayKokkos <real_t> (matrix_size, matrix_size);
@@ -3399,16 +3399,16 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
 
         Kokkos::parallel_for ("MMM", TeamPolicy(matrix_size, Kokkos::AUTO), KOKKOS_LAMBDA (const TeamPolicy::member_type &teamMember) {
-                const int i = teamMember.league_rank();
+                const int k = teamMember.league_rank();
 
                 Kokkos::parallel_for (Kokkos::TeamThreadRange (teamMember, matrix_size), [=] (const int j) {
                     double temp_var = 0.0;
 
-                    Kokkos::parallel_reduce (Kokkos::ThreadVectorRange (teamMember, matrix_size), [=] (const int k, double &mat_val) {
-                        mat_val += (cak_mat1(i, k) * cak_mat2(k, j));
+                    Kokkos::parallel_reduce (Kokkos::ThreadVectorRange (teamMember, matrix_size), [=] (const int i, double &mat_val) {
+                        mat_val += (cak_mat2(j, k) * cak_mat1(k, i));
                     }, temp_var);
 
-                    cak_mat3(i, j) = temp_var;
+                    cak_mat3(k, j) = temp_var;
                     //printf("Mat3 (%d, %d) %lf\n", i, j, mat3(i, j));
                 });
             });
@@ -3472,16 +3472,16 @@ int main(int argc, char** argv) {
         begin = std::chrono::high_resolution_clock::now();
 
         Kokkos::parallel_for ("MMM (KV)", TeamPolicy(matrix_size, Kokkos::AUTO), KOKKOS_LAMBDA (const TeamPolicy::member_type &teamMember) {
-                const int i = teamMember.league_rank();
+                const int k = teamMember.league_rank();
 
                 Kokkos::parallel_for (Kokkos::TeamThreadRange (teamMember, matrix_size), [=] (const int j) {
                     double temp_var = 0.0;
 
-                    Kokkos::parallel_reduce (Kokkos::ThreadVectorRange (teamMember, matrix_size), [=] (const int k, double &mat_val) {
-                        mat_val += (kv_mat1(i, k) * kv_mat2(k, j));
+                    Kokkos::parallel_reduce (Kokkos::ThreadVectorRange (teamMember, matrix_size), [=] (const int i, double &mat_val) {
+                        mat_val += (kv_mat2(j, k) * kv_mat1(k, i));
                     }, temp_var);
 
-                    kv_mat3(i, j) = temp_var;
+                    kv_mat3(k, j) = temp_var;
                     //printf("Mat3 (%d, %d) %lf\n", i, j, mat3(i, j));
                 });
             });
