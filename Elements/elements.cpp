@@ -44,12 +44,12 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>  // std::cout etc.
 #include <cmath>
 
-#include "utilities.h"
+//#include "utilities.h"
 #include "elements.h"
 
 
 
-using namespace utils;
+//using namespace utils;
 
 
 namespace elements{
@@ -100,7 +100,7 @@ face 6; [1,3,7,5]
 
 // creates nodal positions with Labatto spacing
 void labatto_nodes_1D(
-    c_array_t <real_t> &lab_nodes_1D,
+    CArray <real_t> &lab_nodes_1D,
     const int &num){
     if (num == 1){
         lab_nodes_1D(0) = 0.0;
@@ -367,7 +367,7 @@ void labatto_nodes_1D(
 
 // creates quadrature weights for Labatto polynomial
 void labatto_weights_1D(
-    c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
+    CArray <real_t> &lab_weights_1D,  // Labbatto weights
     const int &num){                     // Interpolation order
     if (num == 1){
         lab_weights_1D(0) = 2.0;
@@ -635,9 +635,9 @@ void labatto_weights_1D(
 
 // Create set of quadrature weights for a line through the subcells
 void length_weights(
-    c_array_t <real_t> &len_weights_1D,  // Labbatto weights
-    c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
-    c_array_t <real_t> &lab_nodes_1D,
+    CArray <real_t> &len_weights_1D,  // Labbatto weights
+    CArray <real_t> &lab_weights_1D,  // Labbatto weights
+    CArray <real_t> &lab_nodes_1D,
     const int &p_order){
 
     real_t alpha1 = (lab_nodes_1D(1) - lab_nodes_1D(0) - lab_weights_1D(0))
@@ -673,9 +673,9 @@ void length_weights(
 
 // Create set of quadrature weights for the subcells
 void sub_weights(
-    c_array_t <real_t> &sub_weights_1D,  // Labbatto weights
-    c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
-    c_array_t <real_t> &lab_nodes_1D,
+    CArray <real_t> &sub_weights_1D,  // Labbatto weights
+    CArray <real_t> &lab_weights_1D,  // Labbatto weights
+    CArray <real_t> &lab_nodes_1D,
     const int &p_order){
 
     real_t alpha1 = (lab_nodes_1D(1) - lab_nodes_1D(0) - lab_weights_1D(0))
@@ -723,8 +723,8 @@ void sub_weights(
 
 // Some linear algebra snippets
 void mat_inverse(
-    c_array_t <real_t> &mat_inv,
-    c_array_t <real_t> &matrix){
+    CArray <real_t> &mat_inv,
+    CArray <real_t> &matrix){
 
     double A_11 = matrix(1, 1)*matrix(2, 2) 
                 - matrix(2, 1)*matrix(1, 2);
@@ -768,9 +768,9 @@ void mat_inverse(
 }
 
 void mat_mult(
-    c_array_t <real_t> &result,
-    c_array_t <real_t> &A,
-    c_array_t <real_t> &B){
+    CArray <real_t> &result,
+    CArray <real_t> &A,
+    CArray <real_t> &B){
 
     result(0, 0) = A(0, 0)*B(0, 0) + A(0, 1)*B(1, 0) + A(0, 2)*B(2, 0);
     result(0, 1) = A(0, 0)*B(0, 1) + A(0, 1)*B(1, 1) + A(0, 2)*B(2, 1);
@@ -784,8 +784,8 @@ void mat_mult(
 }
 
 void mat_trans(
-    c_array_t <real_t> &trans,
-    c_array_t <real_t> &mat){
+    CArray <real_t> &trans,
+    CArray <real_t> &mat){
 
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -795,10 +795,10 @@ void mat_trans(
 }
 
 void set_nodes_wgts(
-    c_array_t <real_t> &lab_nodes_1D,
-    c_array_t <real_t> &lab_weights_1D,
-    c_array_t <real_t> &len_weights_1D,
-    c_array_t <real_t> &sub_weights_1D, 
+    CArray <real_t> &lab_nodes_1D,
+    CArray <real_t> &lab_weights_1D,
+    CArray <real_t> &len_weights_1D,
+    CArray <real_t> &sub_weights_1D, 
     const int p_order){
 
     int num_g_pts_1d = 2 * p_order + 1;
@@ -862,7 +862,7 @@ void refine_mesh(
     //  Generate point positiont in reference space to map onto initial mesh
     //  ---------------------------------------------------------------------------
 
-    auto temp_pts = c_array_t<real_t> (num_g_pts_1d, num_g_pts_1d, num_g_pts_1d, 3);
+    auto temp_pts = CArray<real_t> (num_g_pts_1d, num_g_pts_1d, num_g_pts_1d, 3);
 
     double dx = 2.0/((double)num_g_pts_1d - 1.0);  // len/(num_nodes-1)
     double dy = 2.0/((double)num_g_pts_1d - 1.0);  // len/(num_nodes-1)
@@ -886,7 +886,7 @@ void refine_mesh(
     // temp array to hold positions
     real_t * temp_gauss_point_coords; 
     temp_gauss_point_coords = new real_t[num_elem*num_g_pts*dim];
-    auto g_points_in_mesh = view_c_array <real_t> (temp_gauss_point_coords, num_elem*num_g_pts, dim);
+    auto g_points_in_mesh = ViewCArray <real_t> (temp_gauss_point_coords, num_elem*num_g_pts, dim);
 
 
     // Reference node positions for element (currently p1, replace with element library)
@@ -913,9 +913,9 @@ void refine_mesh(
     real_t y_init_a[8];
     real_t z_init_a[8];
 
-    auto x_init = view_c_array <real_t> (x_init_a, 8);
-    auto y_init = view_c_array <real_t> (y_init_a, 8);
-    auto z_init = view_c_array <real_t> (z_init_a, 8);
+    auto x_init = ViewCArray <real_t> (x_init_a, 8);
+    auto y_init = ViewCArray <real_t> (y_init_a, 8);
+    auto z_init = ViewCArray <real_t> (z_init_a, 8);
 
     int g_point_count = 0; 
 
@@ -989,10 +989,10 @@ void refine_mesh(
     real_t dist_max;
     real_t cell_nodes[24];
     
-    auto vert1 = view_c_array <real_t> (cell_nodes, 8, 3);
+    auto vert1 = ViewCArray <real_t> (cell_nodes, 8, 3);
     
     real_t distance[28]; 
-    auto dist = view_c_array <real_t> (distance, 28);
+    auto dist = ViewCArray <real_t> (distance, 28);
 
     for (int cell_gid = 0; cell_gid < init_mesh.num_cells(); cell_gid++){
         
@@ -1185,12 +1185,12 @@ void refine_mesh(
     //  as well as the cells associated with each element
     //  ---------------------------------------------------------------------------
 
-    // auto gauss_id_in_cell = c_array_t<int> (sub_mesh.num_cells(), num_sub_1d*num_sub_1d*num_sub_1d, 8);
+    // auto gauss_id_in_cell = CArray<int> (sub_mesh.num_cells(), num_sub_1d*num_sub_1d*num_sub_1d, 8);
     int sub_in_elem = num_sub_1d*num_sub_1d*num_sub_1d;
     int * gauss_id_in_cell;
 
     gauss_id_in_cell = new int[mesh.num_cells()*sub_in_elem*8];
-    auto gauss_in_cell = view_c_array<int> (gauss_id_in_cell, mesh.num_cells(), sub_in_elem, 8);
+    auto gauss_in_cell = ViewCArray<int> (gauss_id_in_cell, mesh.num_cells(), sub_in_elem, 8);
 
     int p0, p1, p2, p3, p4, p5, p6, p7;
     p0 = p1 = p2 = p3 = p4 = p5 = p6 = p7 = 0;
@@ -1503,9 +1503,9 @@ void line_lobatto_info(
 
 // setting gauss quadrature points for 2D elements
 void gauss_2d(
-    view_c_array <real_t> &these_g_pts,   // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
-    view_c_array <real_t> &tot_g_weight,  // 2D product of gauss weights
+    ViewCArray <real_t> &these_g_pts,   // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &tot_g_weight,  // 2D product of gauss weights
     int &quad_order){                     // quadrature order (m)
 
     int tot_pts = (quad_order*quad_order);    // total quad points in 2D
@@ -1541,9 +1541,9 @@ void gauss_2d(
 
 // setting gauss quadrature points for 3D elements
 void gauss_3d(
-    view_c_array <real_t> &these_g_pts,   // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
-    view_c_array <real_t> &tot_g_weight,  // 3D product of gauss weights
+    ViewCArray <real_t> &these_g_pts,   // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &tot_g_weight,  // 3D product of gauss weights
     int &quad_order){                     // quadrature order (n)
 
     // total quad points in 3D
@@ -1593,8 +1593,8 @@ void gauss_3d(
 
 // setting gauss quadrature points for 4D elements
 void gauss_4d(
-    view_c_array <real_t> &these_g_pts, // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &these_g_pts, // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
     int &quad_order, // quadrature order (n)
     const int &dim){  // dimension
 
@@ -1658,8 +1658,8 @@ void gauss_4d(
 
 // setting Gauss-Lobatto quadrature points for 2D elements
 void lobatto_2d(
-    view_c_array <real_t> &these_L_pts, // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &these_L_pts, // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
     int &quad_order){ // quadrature order (n)
 
     int tot_pts = (quad_order*quad_order);    // total quad points in 2D
@@ -1693,8 +1693,8 @@ void lobatto_2d(
 
 // setting Gauss-Lobatto quadrature points for 3D elements
 void lobatto_3d(
-    view_c_array <real_t> &these_L_pts, // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &these_L_pts, // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
     int &quad_order){  // quadrature order (n)
 
     // total quad points in 3D
@@ -1741,8 +1741,8 @@ void lobatto_3d(
 
 // setting gauss quadrature points for 4D elements
 void lobatto_4d(
-    view_c_array <real_t> &these_L_pts, // gauss points
-    view_c_array <real_t> &these_weights, // gauss weights
+    ViewCArray <real_t> &these_L_pts, // gauss points
+    ViewCArray <real_t> &these_weights, // gauss weights
     int &quad_order, // quadrature order (n)
     const int &dim){  // dimension
 
@@ -1805,10 +1805,10 @@ void lobatto_4d(
 
 //defining the jacobian for 2D elements
 void jacobian_2d(
-    view_c_array <real_t> &J_matrix, 
+    ViewCArray <real_t> &J_matrix, 
     real_t &det_J,
-    const view_c_array <real_t> &vertices, 
-    const view_c_array <real_t> &this_partial,
+    const ViewCArray <real_t> &vertices, 
+    const ViewCArray <real_t> &this_partial,
     const int &num_verts){
 
     int dim = 2;
@@ -1839,10 +1839,10 @@ void jacobian_2d(
 
 //defining the jacobian for 3D elements
 void jacobian_3d(
-    view_c_array <real_t> &J_matrix, 
+    ViewCArray <real_t> &J_matrix, 
     real_t &det_J,
-    const view_c_array <real_t> &vertices, 
-    const view_c_array <real_t> &this_partial,
+    const ViewCArray <real_t> &vertices, 
+    const ViewCArray <real_t> &this_partial,
     const int &num_verts){
 
     const int dim = 3;
@@ -1880,10 +1880,10 @@ void jacobian_3d(
 
 //defining the jacobian for 4D elements
 void jacobian_4d(
-    view_c_array <real_t> &J_matrix, 
+    ViewCArray <real_t> &J_matrix, 
     real_t &det_J,
-    const view_c_array <real_t> &vertices, 
-    const view_c_array <real_t> &this_partial,
+    const ViewCArray <real_t> &vertices, 
+    const ViewCArray <real_t> &this_partial,
     const int &num_verts,
     const int &dim){
    
@@ -1934,8 +1934,8 @@ void jacobian_4d(
 
 //defining the inverse jacobian for 2D element    
 void jacobian_inverse_2d(
-    view_c_array <real_t> &J_inverse, 
-    const view_c_array <real_t> &jacobian){
+    ViewCArray <real_t> &J_inverse, 
+    const ViewCArray <real_t> &jacobian){
 
     real_t det = 0.0;
     det = jacobian(0, 0)*jacobian(1, 1) 
@@ -1950,8 +1950,8 @@ void jacobian_inverse_2d(
 
 // defining  the inverse of the Jacobian for 3D elements
 void jacobian_inverse_3d(
-    view_c_array <real_t> &J_inverse,
-    const view_c_array <real_t> &jacobian){
+    ViewCArray <real_t> &J_inverse,
+    const ViewCArray <real_t> &jacobian){
 
     real_t A_11 = jacobian(1, 1)*jacobian(2, 2) 
                 - jacobian(1, 2)*jacobian(2, 1);
@@ -1997,8 +1997,8 @@ void jacobian_inverse_3d(
 
 // defining  the inverse of the Jacobian for 4D elements
 void jacobian_inverse_4d(
-    view_c_array <real_t> &J_inverse,
-    const view_c_array <real_t> &jacobian,
+    ViewCArray <real_t> &J_inverse,
+    const ViewCArray <real_t> &jacobian,
     const real_t &det_J){
 
 
@@ -2159,7 +2159,7 @@ void jacobian_inverse_4d(
 
 // creates nodal positions with Chebyshev spacing
 void chebyshev_nodes_1D(
-    view_c_array <real_t> &cheb_nodes_1D,   // Chebyshev nodes
+    ViewCArray <real_t> &cheb_nodes_1D,   // Chebyshev nodes
     const int &order){                      // Interpolation order
 
     real_t pi = 3.14159265358979323846;
@@ -2232,14 +2232,14 @@ const int Quad4::vert_to_node[Quad4::num_verts] =
 
 // calculate a physical position in an element for a given xi,eta
 void Quad4::physical_position(
-    view_c_array <real_t> &x_point, 
-    const view_c_array <real_t> &xi_point, 
-    const view_c_array <real_t> &vertices){
+    ViewCArray <real_t> &x_point, 
+    const ViewCArray <real_t> &xi_point, 
+    const ViewCArray <real_t> &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions from each vertex for 0 through num_verts(xi,eta)
     for( int vert_lid = 0; vert_lid < num_verts; vert_lid++ ){
@@ -2262,10 +2262,10 @@ void Quad4::physical_position(
 
 // calculate the value for the basis at each node for a given xi,eta
 void Quad4::basis(
-    view_c_array <real_t> &basis,
-    const view_c_array <real_t> &xi_point){
+    ViewCArray <real_t> &basis,
+    const ViewCArray <real_t> &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
     
     // calculate the shape functions from each vertex for 0 through num_verts(xi,eta)
     for( int vert_lid = 0; vert_lid < num_verts; vert_lid++ ){
@@ -2281,10 +2281,10 @@ void Quad4::basis(
 
 // Partial derivative of shape functions with respect to Xi
 void  Quad4::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
     
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++){
         partial_xi(vert_lid) = (1.0/4.0)
@@ -2297,10 +2297,10 @@ void  Quad4::partial_xi_basis(
 
 // Partial derivative of shape functions with respect to Eta
 void  Quad4::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++){
         partial_eta(vert_lid) = (1.0/4.0)
@@ -2370,14 +2370,14 @@ const int Quad8::vert_to_node[Quad8::num_verts] =
 
 // calculate a physical position in an element for a given xi,eta,
 void Quad8::physical_position(
-    view_c_array <real_t> &x_point, 
-    const view_c_array <real_t> &xi_point, 
-    const view_c_array <real_t> &vertices){
+    ViewCArray <real_t> &x_point, 
+    const ViewCArray <real_t> &xi_point, 
+    const ViewCArray <real_t> &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions for node 0,1,2,3(xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2416,10 +2416,10 @@ void Quad8::physical_position(
 
 // calculate the value for the basis at each node for a given xi,eta
 void Quad8::basis(
-    view_c_array <real_t> &basis,
-    const view_c_array <real_t> &xi_point){
+    ViewCArray <real_t> &basis,
+    const ViewCArray <real_t> &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
     
     // calculate the shape functions for node 0,1,2,3(xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2451,10 +2451,10 @@ void Quad8::basis(
 
 // Partial derivative of shape functions with respect to Xi
 void Quad8::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the Xi partials for node 0,1,2,3 (xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2486,10 +2486,10 @@ void Quad8::partial_xi_basis(
 
 // Partial derivative of shape functions with respect to Eta
 void Quad8::partial_eta_basis(
-    view_c_array <real_t>  &partial_eta, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t>  &partial_eta, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the Eta partials for node 0,1,2,3 (xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2588,15 +2588,15 @@ const int Quad12::vert_to_node[Quad12::num_verts] =
 
 // calculate a physical position in an element for a given xi,eta,
 void Quad12::physical_position(
-    view_c_array <real_t>  &x_point, 
-    const view_c_array <real_t>  &xi_point, 
-    const view_c_array <real_t>  &vertices){
+    ViewCArray <real_t>  &x_point, 
+    const ViewCArray <real_t>  &xi_point, 
+    const ViewCArray <real_t>  &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
 
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions for node 0,1,2,3(xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2640,10 +2640,10 @@ void Quad12::physical_position(
 
 // calculate the value for the basis at each node for a given xi,eta
 void Quad12::basis(
-    view_c_array <real_t>  &basis,
-    const view_c_array <real_t>  &xi_point){
+    ViewCArray <real_t>  &basis,
+    const ViewCArray <real_t>  &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions for node 0,1,2,3(xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2676,10 +2676,10 @@ void Quad12::basis(
 
 // Partial derivative of shape functions with respect to Xi
 void Quad12::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the Xi partials for node 0,1,2,3 (xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
@@ -2713,10 +2713,10 @@ void Quad12::partial_xi_basis(
 
 // Partial derivative of shape functions with respect to Eta
 void Quad12::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
     // calculate the Eta partials for node 0,1,2,3 (xi,eta)
     for( int vert_lid = 0; vert_lid < 4; vert_lid++ ){
         partial_eta(vert_lid) = 1.0/32.0
@@ -2811,17 +2811,17 @@ representative linear element for visualization
 // Lagrange Interp in 1D, returns interpolants and derivative
 // works with any nodal spacing
 void QuadN::lagrange_1D(
-    view_c_array <real_t> &interp,          // interpolant
-    view_c_array <real_t> &Dinterp,         // derivative of function
+    ViewCArray <real_t> &interp,          // interpolant
+    ViewCArray <real_t> &Dinterp,         // derivative of function
     const real_t &x_point,                  // point of interest in element
-    const view_c_array <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
+    const ViewCArray <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
     const int &orderN){                     // order of element
 
     real_t num_a[orderN+1];
-    auto num = view_c_array <real_t> (num_a, orderN+1); // numerator of interpolant
+    auto num = ViewCArray <real_t> (num_a, orderN+1); // numerator of interpolant
 
     real_t denom_a[orderN+1];
-    auto denom = view_c_array <real_t> (denom_a, orderN+1); // denomenator of interpolant
+    auto denom = ViewCArray <real_t> (denom_a, orderN+1); // denomenator of interpolant
   
     real_t q = 0.0;
    
@@ -2861,8 +2861,8 @@ void QuadN::lagrange_1D(
 
 // Corners of Lagrange element for mapping
 void QuadN::corners (
-    view_c_array <real_t> &lag_nodes,   // Nodes of Lagrange elements 
-    view_c_array <real_t> &lag_corner,  // corner nodes of HexN element
+    ViewCArray <real_t> &lag_nodes,   // Nodes of Lagrange elements 
+    ViewCArray <real_t> &lag_corner,  // corner nodes of HexN element
     const int &orderN){                 // Element order
 
     /*
@@ -2917,9 +2917,9 @@ void QuadN::corners (
 // Functions for mapping reference position to physical position for any 
 // point in an arbitrary order 3D lagrange element
 void QuadN::physical_position (
-    view_c_array <real_t> &x_point,             // location in real space
-    const view_c_array <real_t> &lag_nodes,     // Nodes of Lagrange elements 
-    const view_c_array <real_t> &lag_basis_2d,  // 2D basis values 
+    ViewCArray <real_t> &x_point,             // location in real space
+    const ViewCArray <real_t> &lag_nodes,     // Nodes of Lagrange elements 
+    const ViewCArray <real_t> &lag_basis_2d,  // 2D basis values 
     const int &orderN){                         // order of the element
 
     int nodes = orderN + 1;
@@ -2935,15 +2935,15 @@ void QuadN::physical_position (
 
 
 void QuadN::basis_partials (
-    view_c_array <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
-    view_c_array <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
-    view_c_array <real_t> &val_1d,          // Interpolant Value in 1D
-    view_c_array <real_t> &DVal_1d,         // Derivateive of basis in 1D
-    view_c_array <real_t> &val_2d,          // for holding the interpolant in each direction
-    view_c_array <real_t> &DVal_2d,         // for holding the derivatives in each direction
-    view_c_array <real_t> &lag_basis_2d,    // 3D basis values 
-    view_c_array <real_t> &lag_partial,     // Partial of basis 
-    const view_c_array <real_t> &xi_point,  // point of interest
+    ViewCArray <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
+    ViewCArray <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
+    ViewCArray <real_t> &val_1d,          // Interpolant Value in 1D
+    ViewCArray <real_t> &DVal_1d,         // Derivateive of basis in 1D
+    ViewCArray <real_t> &val_2d,          // for holding the interpolant in each direction
+    ViewCArray <real_t> &DVal_2d,         // for holding the derivatives in each direction
+    ViewCArray <real_t> &lag_basis_2d,    // 3D basis values 
+    ViewCArray <real_t> &lag_partial,     // Partial of basis 
+    const ViewCArray <real_t> &xi_point,  // point of interest
     const int &orderN){                     // Element order
 
     /*
@@ -3092,14 +3092,14 @@ const int Hex8::vert_to_node[Hex8::num_verts] =
 
 // get the physical location for a given xi_point
 void Hex8::physical_position (
-    view_c_array <real_t>  &x_point, 
-    const view_c_array <real_t>  &xi_point, 
-    const view_c_array <real_t>  &vertices){
+    ViewCArray <real_t>  &x_point, 
+    const ViewCArray <real_t>  &xi_point, 
+    const ViewCArray <real_t>  &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
     
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions from each vertex for (xi,eta,mu)
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++ ){
@@ -3125,10 +3125,10 @@ void Hex8::physical_position (
 
 // calculate the value for the basis at each node for a given xi,eta, mu
 void Hex8::basis(
-    view_c_array <real_t>  &basis,
-    const view_c_array <real_t>  &xi_point){
+    ViewCArray <real_t>  &basis,
+    const ViewCArray <real_t>  &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the shape functions from each vertex for (xi,eta,mu)
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++ ){
@@ -3144,10 +3144,10 @@ void Hex8::basis(
 // calculate the partials of the shape function 
 // with respect to Xi
 void Hex8::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++){
         partial_xi(vert_lid) = (1.0/8.0)
@@ -3161,10 +3161,10 @@ void Hex8::partial_xi_basis(
 
 // with respect to eta
 void Hex8::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++){
         partial_eta(vert_lid) = (1.0/8.0)
@@ -3178,10 +3178,10 @@ void Hex8::partial_eta_basis(
 
 // with repsect to mu
 void Hex8::partial_mu_basis(
-    view_c_array <real_t> &partial_mu, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_mu, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int vert_lid = 0; vert_lid < num_verts; vert_lid++){
         partial_mu(vert_lid) = (1.0/8.0)
@@ -3285,14 +3285,14 @@ const int Hex20::vert_to_node[Hex20::num_verts] =
 
 // get the physical location for a given xi_point
 void Hex20::physical_position (
-    view_c_array <real_t>  &x_point, 
-    const view_c_array <real_t>  &xi_point, 
-    const view_c_array <real_t>  &vertices){
+    ViewCArray <real_t>  &x_point, 
+    const ViewCArray <real_t>  &xi_point, 
+    const ViewCArray <real_t>  &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
     
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner shape functions for (xi,eta,mu)
     for (int vert_lid=0; vert_lid<8; vert_lid++){
@@ -3344,10 +3344,10 @@ void Hex20::physical_position (
 
 // calculate the value for the basis at each node for a given xi,eta, mu
 void Hex20::basis(
-    view_c_array <real_t>  &basis,
-    const view_c_array <real_t>  &xi_point){
+    ViewCArray <real_t>  &basis,
+    const ViewCArray <real_t>  &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner shape functions for (xi,eta,mu)
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3390,10 +3390,10 @@ void Hex20::basis(
 // Calculate the partials of the shape functions
 // with respect to Xi
 void  Hex20::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // For 8 Corner shape functions pts=[0,1,2,3,4,5,6,7]
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3436,10 +3436,10 @@ void  Hex20::partial_xi_basis(
 
 // with respect to Eta
 void Hex20::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // For 8 Corner shape functions pts=[0,1,2,3,4,5,6,7]
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3481,10 +3481,10 @@ void Hex20::partial_eta_basis(
 
 // with repsect to mu
 void Hex20::partial_mu_basis(
-    view_c_array <real_t> &partial_mu, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_mu, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // For 8 Corner shape functions pts=[0,1,2,3,4,5,6,7]
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3645,14 +3645,14 @@ const int Hex32::vert_to_node[Hex32::num_verts] =
 
 // get the physical location for a given xi_point
 void Hex32::physical_position (
-    view_c_array <real_t>  &x_point, 
-    const view_c_array <real_t>  &xi_point, 
-    const view_c_array <real_t>  &vertices){
+    ViewCArray <real_t>  &x_point, 
+    const ViewCArray <real_t>  &xi_point, 
+    const ViewCArray <real_t>  &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
     
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner shape functions for (xi,eta,mu)
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3709,10 +3709,10 @@ void Hex32::physical_position (
 
 
 void Hex32::basis(
-    view_c_array <real_t>  &basis,
-    const view_c_array <real_t>  &xi_point){
+    ViewCArray <real_t>  &basis,
+    const ViewCArray <real_t>  &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner shape functions for (xi,eta,mu)
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3757,10 +3757,10 @@ void Hex32::basis(
 // Calculate the partials of the shape functions
 // with respect to Xi
 void  Hex32::partial_xi_basis(
-    view_c_array <real_t>  &partial_xi, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t>  &partial_xi, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner partial wrt Xi 
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3806,10 +3806,10 @@ void  Hex32::partial_xi_basis(
 // with respect to Eta
 // functions for [18-15] and [24-31] were switched 
 void Hex32::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner partial wrt Eta 
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3857,10 +3857,10 @@ void Hex32::partial_eta_basis(
 // with repsect to mu
 // functions for [18-15] and [24-31] were switched 
 void Hex32::partial_mu_basis(
-    view_c_array <real_t> &partial_mu, 
-    const view_c_array <real_t>  &xi_point) {
+    ViewCArray <real_t> &partial_mu, 
+    const ViewCArray <real_t>  &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the 8 corner partial wrt Mu 
     for (int vert_lid = 0; vert_lid < 8; vert_lid++){
@@ -3983,17 +3983,17 @@ representative linear element for visualization
 // Lagrange Interp in 1D, returns interpolants and derivative
 // works with any nodal spacing
 void HexN::lagrange_1D(
-    view_c_array <real_t> &interp,          // interpolant
-    view_c_array <real_t> &Dinterp,         // derivative of function
+    ViewCArray <real_t> &interp,          // interpolant
+    ViewCArray <real_t> &Dinterp,         // derivative of function
     const real_t &x_point,                  // point of interest in element
-    const view_c_array <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
+    const ViewCArray <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
     const int &orderN){                     // order of element
 
     real_t num_a[orderN+1];
-    auto num = view_c_array <real_t> (num_a, orderN+1); // numerator of interpolant
+    auto num = ViewCArray <real_t> (num_a, orderN+1); // numerator of interpolant
 
     real_t denom_a[orderN+1];
-    auto denom = view_c_array <real_t> (denom_a, orderN+1); // denomenator of interpolant
+    auto denom = ViewCArray <real_t> (denom_a, orderN+1); // denomenator of interpolant
   
     real_t q = 0.0;
    
@@ -4033,8 +4033,8 @@ void HexN::lagrange_1D(
 
 // Corners of Lagrange element for mapping
 void HexN::corners (
-    view_c_array <real_t> &lag_nodes,   // Nodes of Lagrange elements 
-    view_c_array <real_t> &lag_corner,  // corner nodes of HexN element
+    ViewCArray <real_t> &lag_nodes,   // Nodes of Lagrange elements 
+    ViewCArray <real_t> &lag_corner,  // corner nodes of HexN element
     const int &orderN){                 // Element order
 
 
@@ -4110,9 +4110,9 @@ void HexN::corners (
 // Functions for mapping reference position to physical position for any 
 // point in an arbitrary order 3D lagrange element
 void HexN::physical_position (
-    view_c_array <real_t> &x_point,             // location in real space
-    const view_c_array <real_t> &lag_nodes,     // Nodes of Lagrange elements 
-    const view_c_array <real_t> &lag_basis_3d,  // 3D basis values 
+    ViewCArray <real_t> &x_point,             // location in real space
+    const ViewCArray <real_t> &lag_nodes,     // Nodes of Lagrange elements 
+    const ViewCArray <real_t> &lag_basis_3d,  // 3D basis values 
     const int &orderN){                         // order of the element
 
     int nodes = orderN + 1;
@@ -4128,15 +4128,15 @@ void HexN::physical_position (
 
 
 void HexN::basis_partials (
-    view_c_array <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
-    view_c_array <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
-    view_c_array <real_t> &val_1d,          // Interpolant Value in 1D
-    view_c_array <real_t> &DVal_1d,         // Derivateive of basis in 1D
-    view_c_array <real_t> &val_3d,          // for holding the interpolant in each direction
-    view_c_array <real_t> &DVal_3d,         // for holding the derivatives in each direction
-    view_c_array <real_t> &lag_basis_3d,    // 3D basis values 
-    view_c_array <real_t> &lag_partial,     // Partial of basis 
-    const view_c_array <real_t> &xi_point,  // point of interest
+    ViewCArray <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
+    ViewCArray <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
+    ViewCArray <real_t> &val_1d,          // Interpolant Value in 1D
+    ViewCArray <real_t> &DVal_1d,         // Derivateive of basis in 1D
+    ViewCArray <real_t> &val_3d,          // for holding the interpolant in each direction
+    ViewCArray <real_t> &DVal_3d,         // for holding the derivatives in each direction
+    ViewCArray <real_t> &lag_basis_3d,    // 3D basis values 
+    ViewCArray <real_t> &lag_partial,     // Partial of basis 
+    const ViewCArray <real_t> &xi_point,  // point of interest
     const int &orderN){                     // Element order
 
    /*
@@ -4325,14 +4325,14 @@ real_t Tess16::ref_vert[ Tess16::num_verts* Tess16::num_dim] = // listed as {Xi,
 
 // calculate a physical position in an element for a given xi,eta,mu
 void Tess16::physical_position(
-    view_c_array <real_t> &x_point,
-    const view_c_array <real_t> &xi_point,
-    const view_c_array <real_t> &vertices){
+    ViewCArray <real_t> &x_point,
+    const ViewCArray <real_t> &xi_point,
+    const ViewCArray <real_t> &vertices){
 
     real_t basis_a[num_verts];
-    auto basis = view_c_array <real_t> (basis_a, num_verts);
+    auto basis = ViewCArray <real_t> (basis_a, num_verts);
     
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
    
     // calculate the shape functions from each vertex for (xi,eta,mu, tau)
     for(int this_vert = 0; this_vert < num_verts; this_vert++){
@@ -4359,10 +4359,10 @@ void Tess16::physical_position(
 
 // calculate the value for the basis at each node for a given xi,eta,mu,tau
 void Tess16::basis(
-    view_c_array <real_t>  &basis,
-    const view_c_array <real_t>  &xi_point){
+    ViewCArray <real_t>  &basis,
+    const ViewCArray <real_t>  &xi_point){
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     // calculate the basis functions from each vertex for (xi,eta,mu, tau)
     for(int this_vert = 0; this_vert < num_verts; this_vert++){
@@ -4378,10 +4378,10 @@ void Tess16::basis(
 
 // Partial derivative of shape functions with respect to Xi at Xi_point
 void Tess16::partial_xi_basis(
-    view_c_array <real_t> &partial_xi, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_xi, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int this_vert = 0; this_vert < num_verts; this_vert++){
         partial_xi(this_vert) = 1.0/16.0
@@ -4396,10 +4396,10 @@ void Tess16::partial_xi_basis(
 
 // Partial derivative of shape functions with respect to Eta
 void Tess16::partial_eta_basis(
-    view_c_array <real_t> &partial_eta, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_eta, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int this_vert = 0; this_vert < num_verts; this_vert++){  
         partial_eta(this_vert) = 1.0/16.0
@@ -4414,10 +4414,10 @@ void Tess16::partial_eta_basis(
 
 // Partial derivative of shape functions with respect to Mu
 void Tess16::partial_mu_basis(
-    view_c_array <real_t> &partial_mu, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_mu, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int this_vert = 0; this_vert < num_verts; this_vert++){  
         partial_mu(this_vert) = 1.0/16.0
@@ -4432,10 +4432,10 @@ void Tess16::partial_mu_basis(
 
 // Partial derivative of shape functions with respect to Tau
 void Tess16::partial_tau_basis(
-    view_c_array <real_t> &partial_tau, 
-    const view_c_array <real_t> &xi_point) {
+    ViewCArray <real_t> &partial_tau, 
+    const ViewCArray <real_t> &xi_point) {
 
-    auto ref_verts = view_c_array<real_t> (ref_vert, num_verts, num_dim);
+    auto ref_verts = ViewCArray<real_t> (ref_vert, num_verts, num_dim);
 
     for (int this_vert = 0; this_vert < num_verts; this_vert++){  
         partial_tau(this_vert) = 1.0/16.0

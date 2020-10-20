@@ -48,10 +48,10 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <math.h>
 
-#include "utilities.h"
+//#include "utilities.h"
 #include "matar.h"
 
-using namespace utils;
+//using namespace utils;
 
 
 
@@ -63,47 +63,47 @@ namespace elements{
 
     // Used by Lobatto 1D/2D to set Lobatto quadrature points
     void labatto_nodes_1D(
-        c_array_t <real_t> &lab_nodes_1D,
+        CArray <real_t> &lab_nodes_1D,
         const int &num);
 
     void labatto_weights_1D(
-        c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
+        CArray <real_t> &lab_weights_1D,  // Labbatto weights
         const int &num);
 
     void length_weights(
-        c_array_t <real_t> &len_weights_1D,  // Labbatto weights
-        c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
-        c_array_t <real_t> &lab_nodes_1D,
+        CArray <real_t> &len_weights_1D,  // Labbatto weights
+        CArray <real_t> &lab_weights_1D,  // Labbatto weights
+        CArray <real_t> &lab_nodes_1D,
         const int &order);
 
     void sub_weights(
-        c_array_t <real_t> &sub_weights_1D,  // Labbatto weights
-        c_array_t <real_t> &lab_weights_1D,  // Labbatto weights
-        c_array_t <real_t> &lab_nodes_1D,
+        CArray <real_t> &sub_weights_1D,  // Labbatto weights
+        CArray <real_t> &lab_weights_1D,  // Labbatto weights
+        CArray <real_t> &lab_nodes_1D,
         const int &order);
 
     void mat_inverse(
-        c_array_t <real_t> &mat_inv,
-        c_array_t <real_t> &matrix);
+        CArray <real_t> &mat_inv,
+        CArray <real_t> &matrix);
 
     void mat_mult(
-        c_array_t <real_t> &result,
-        c_array_t <real_t> &A,
-        c_array_t <real_t> &B);
+        CArray <real_t> &result,
+        CArray <real_t> &A,
+        CArray <real_t> &B);
 
     void mat_trans(
-        c_array_t <real_t> &trans,
-        c_array_t <real_t> &mat);
+        CArray <real_t> &trans,
+        CArray <real_t> &mat);
 
     void set_nodes_wgts(
-        c_array_t <real_t> &lab_nodes_1D,
-        c_array_t <real_t> &lab_weights_1D,
-        c_array_t <real_t> &len_weights_1D,
-        c_array_t <real_t> &sub_weights_1D, 
+        CArray <real_t> &lab_nodes_1D,
+        CArray <real_t> &lab_weights_1D,
+        CArray <real_t> &len_weights_1D,
+        CArray <real_t> &sub_weights_1D, 
         int p_order);
 
     void sub_cells(
-        c_array_t <real_t> &lab_nodes_1D,
+        CArray <real_t> &lab_nodes_1D,
         int &p_order, 
         int &dim);
 
@@ -194,22 +194,22 @@ private:
     int   num_cells_in_elem_;
     int   num_nodes_in_elem_;
 
-    int * cells_in_elem_ = NULL;
+    CArray <int> cells_in_elem_;
 
-    int * num_elems_in_elem_ = NULL;
-    int * elems_in_elem_list_start_ = NULL;
-    int * elems_in_elem_list_ = NULL;
-    int * nodes_in_elem_list_ = NULL;
+    CArray <int> num_elems_in_elem_;
+    CArray <int> elems_in_elem_list_start_;
+    CArray <int> elems_in_elem_list_;
+    CArray <int> nodes_in_elem_list_;
 
 
     // ---- CELLS ---- //
     int   num_cells_;
     
-    int * nodes_in_cell_list_ = NULL;      // size of num_cells*8
-    int * num_cells_in_cell_ = NULL;       // size of num_cells
-    int * cells_in_cell_list_start_ = NULL; // size of num_cells+1
-    int * cells_in_cell_list_ = NULL;       // size depends on mesh connectivity
-    int * elems_in_cell_list_ = NULL;       // size depends on mesh connectivity
+    CArray <int> nodes_in_cell_list_;
+    CArray <int> num_cells_in_cell_;
+    CArray <int> cells_in_cell_list_start_;
+    CArray <int> cells_in_cell_list_;
+    CArray <int> elems_in_cell_list_;
 
 
     // ---- VERTICES ---- //
@@ -353,18 +353,18 @@ public:
 
         num_cells_ = num_elem * num_subcells_per_elem;
 
-        cells_in_elem_ = new int[num_elem * num_subcells_per_elem];
+        cells_in_elem_ = CArray <int> (num_elem_, num_subcells_per_elem);
 
-        elem_vol_ = new real_t[rk_storage_*num_elem];
+        elem_vol_ = new real_t[rk_storage_*num_elem_];
 
         // WARNING: FOLLOWING CODE ASSUMES LOBATTO 
         num_nodes_in_elem_ = num_g_pts;
 
-        nodes_in_elem_list_ = new int[num_elem_ * num_g_pts_in_elem_];
+        nodes_in_elem_list_ = CArray <int> (num_elem_, num_g_pts_in_elem_);
 
-        num_elems_in_elem_ = new int[num_elem_ ];
+        num_elems_in_elem_ = CArray <int> (num_elem_);
 
-        elems_in_elem_list_start_ = new int[num_elem_ + 1];
+        elems_in_elem_list_start_ = CArray <int> (num_elem_ + 1);
     }
 
 
@@ -379,13 +379,13 @@ public:
         cell_coords_ = new real_t[num_cells_*num_dim_];
 
 
-        nodes_in_cell_list_   = new int[num_cells_*num_nodes_hex_];
+        nodes_in_cell_list_       = CArray <int> (num_cells_, num_nodes_hex_);
         corners_in_cell_list_ = new int[num_cells_*num_nodes_hex_];
         
-        num_cells_in_cell_       = new int[num_cells_]; 
-        cells_in_cell_list_start_ = new int[num_cells_+1];
+        num_cells_in_cell_        = CArray <int> (num_cells_);
+        cells_in_cell_list_start_ = CArray <int> (num_cells_ + 1);
 
-        elems_in_cell_list_ = new int[num_cells_];
+        elems_in_cell_list_       = CArray <int> (num_cells_);
     }
 
 
@@ -462,7 +462,8 @@ public:
     // returns the number of elements
     inline int num_elems_in_elem (int elem_gid) const
     {
-        return num_elems_in_elem_[elem_gid];
+        //return num_elems_in_elem_[elem_gid];
+        return num_elems_in_elem_(elem_gid);
     }
 
     // returns the number of elements (WARNING: currently assumes constant size)
@@ -474,25 +475,27 @@ public:
     // returns the nodes in an element
     inline int& nodes_in_elem (int elem_gid, int node_lid)
     {
-        return nodes_in_elem_list_[elem_gid * num_g_pts_in_elem_ + node_lid];
+        //return nodes_in_elem_list_[elem_gid * num_g_pts_in_elem_ + node_lid];
+        return nodes_in_elem_list_(elem_gid, node_lid);
     } 
 
     // return array of elements connected to element (corners+faces)
     inline int& elems_in_elem (int elem_gid, int elem_lid) 
     {
         // shift index by 1 so that it is consistent with matrix syntax
-        int start_indx = elems_in_elem_list_start_[elem_gid];
+        int start_indx = elems_in_elem_list_start_(elem_gid);
         
         // get the index in the global 1D array
         int index = start_indx + elem_lid;
         
-        return elems_in_elem_list_[index];
+        return elems_in_elem_list_(index);
     }
 
     // return the the global cell id from local element cell id
     inline int& cells_in_elem (int elem_gid, int cell_lid) 
     {
-        return cells_in_elem_[cell_lid + num_cells_in_elem_*(elem_gid)];
+        //return cells_in_elem_[cell_lid + num_cells_in_elem_*(elem_gid)];
+        return cells_in_elem_(elem_gid, cell_lid);
     }
 
     // return number of gauss points in an element (currently assumes Gauss-Lobatto)
@@ -521,13 +524,14 @@ public:
     // return the node ids local to the cell
     inline int& nodes_in_cell (int cell_gid, int node_lid) const
     {
-        return nodes_in_cell_list_[node_lid + cell_gid*num_nodes_hex_];
+        //return nodes_in_cell_list_[node_lid + cell_gid*num_nodes_hex_];
+        return nodes_in_cell_list_(cell_gid, node_lid);
     }
 
     /* Testing returning slice of array
     inline auto nodes_in_cell(int cell_gid)
     {
-        auto give = view_c_array <int> (&nodes_in_cell_list_[cell_gid*num_nodes_hex_], num_nodes_hex_);
+        auto give = ViewCArray <int> (&nodes_in_cell_list_[cell_gid*num_nodes_hex_], num_nodes_hex_);
         return give;
     }
     */
@@ -535,19 +539,19 @@ public:
     // return the number of cells around the cell
     inline int& num_cells_in_cell (int cell_gid) const
     {
-        return num_cells_in_cell_[cell_gid];
+        return num_cells_in_cell_(cell_gid);
     }
 
     // return the the cells around a cell
     inline int& cells_in_cell (int cell_gid, int cell_lid) const
     {
         // shift index by 1 so that it is consistent with matrix syntax
-        int start_indx = cells_in_cell_list_start_[cell_gid];
+        int start_indx = cells_in_cell_list_start_(cell_gid);
         
         // get the index in the global 1D array
         int index = start_indx + cell_lid;
         
-        return cells_in_cell_list_[index];
+        return cells_in_cell_list_(index);
     }
 
     // return corners connected to a cell
@@ -559,7 +563,7 @@ public:
 
     inline int& elems_in_cell (int cell_gid) const
     {
-        return elems_in_cell_list_[cell_gid];
+        return elems_in_cell_list_(cell_gid);
     }
         
         
@@ -932,7 +936,7 @@ public:
                 int node_gid = nodes_in_cell(cell_gid, node_lid); // get the global_id of the node
 
                 // Assign global index values to nodes_in_cell_list_
-                nodes_in_cell_list_[node_lid + cell_gid*num_nodes_hex_] = node_gid;
+                nodes_in_cell_list_(cell_gid, node_lid) = node_gid;
                 
                 // the global index in the cells_in_node_list_
                 int index = cells_in_node_list_start_[node_gid] + num_corners_saved[node_gid];
@@ -1012,7 +1016,7 @@ public:
         
         int num_cell_cell_saved[num_cells_]; // local variable
         for (int cell_gid = 0; cell_gid < num_cells_; cell_gid++){
-            num_cells_in_cell_[cell_gid] = 0;
+            num_cells_in_cell_(cell_gid) = 0;
             num_cell_cell_saved[cell_gid] = 0;
         }
         
@@ -1035,7 +1039,7 @@ public:
                         num_c_c_pairs ++;
                         
                         // increment the number of cell-cell pairs for this cell
-                        num_cells_in_cell_[cell_gid] ++;
+                        num_cells_in_cell_(cell_gid) ++;
                         
                     } // end if neighbor_cell_id
                 } // end for cell_lid
@@ -1047,12 +1051,12 @@ public:
         // create memory for the list of cells around a cell (num_c_c_pairs is ~2x larger than needed)
         int * temp_cell_in_cell_list = new int [num_c_c_pairs];
 
-        cells_in_cell_list_start_[0] = 0;
+        cells_in_cell_list_start_(0) = 0;
         for (int cell_gid = 0; cell_gid < num_cells_; cell_gid++){
 
             // This is the start of the indices for the corners connected to this node
-            cells_in_cell_list_start_[cell_gid+1] = cells_in_cell_list_start_[cell_gid]
-                                                   + num_cells_in_cell_[cell_gid];
+            cells_in_cell_list_start_(cell_gid+1) = cells_in_cell_list_start_(cell_gid)
+                                                   + num_cells_in_cell_(cell_gid);
         }
 
 
@@ -1070,7 +1074,7 @@ public:
                     int neighbor_cell_id = cells_in_node(node_id, cell_lid);
                     
                     // the global index in the cells_in_cell_list_
-                    int index = cells_in_cell_list_start_[cell_gid] + num_cell_cell_saved[cell_gid];
+                    int index = cells_in_cell_list_start_(cell_gid) + num_cell_cell_saved[cell_gid];
                     
                     int save = 1; // a flag to save (=1) or not (=0)
                     
@@ -1080,7 +1084,7 @@ public:
                     } // end if neighbor_cell_id
                     
                     // check to see if neighbor_id has been saved already
-                    for (int i=cells_in_cell_list_start_[cell_gid]; i<index; i++){
+                    for (int i=cells_in_cell_list_start_(cell_gid); i<index; i++){
                         
                         if (neighbor_cell_id == temp_cell_in_cell_list[i]){
                             save=0;   // don't save, it has been saved already
@@ -1106,15 +1110,15 @@ public:
         
         
         // create memory for the list of cells around a cell
-        cells_in_cell_list_ = new int [actual_size];
+        cells_in_cell_list_ = CArray <int> (actual_size);
         
         // update the number of cells around a cell (because the estimate had duplicates)
         int index = 0;
-        cells_in_cell_list_[0] = 0;
+        cells_in_cell_list_(0) = 0;
         
         for (int cell_gid = 0; cell_gid < num_cells_; cell_gid++){
             
-            num_cells_in_cell_[cell_gid] = num_cell_cell_saved[cell_gid];
+            num_cells_in_cell_(cell_gid) = num_cell_cell_saved[cell_gid];
             
             // note: there is a buffer in the temp_cell_in_cell_list that is not
             // in num_cells_in_cell_ (it is smaller) so I will copying the
@@ -1122,16 +1126,16 @@ public:
             // array to use num_cell_cell_saved[cell_gid]
             
             // the global index range in the temp_cell_in_cell_list
-            int start_cell = cells_in_cell_list_start_[cell_gid];
+            int start_cell = cells_in_cell_list_start_(cell_gid);
             int stop_cell  = start_cell + num_cell_cell_saved[cell_gid];
             
-            cells_in_cell_list_start_[cell_gid] = index; // update the index
+            cells_in_cell_list_start_(cell_gid) = index; // update the index
             
             // save the neighbors to the list
             for (int i = start_cell; i < stop_cell; i++){
                 
                 // save neighboring cell_gid to the final list
-                cells_in_cell_list_[index] = temp_cell_in_cell_list[i];
+                cells_in_cell_list_(index) = temp_cell_in_cell_list[i];
                 
                 // increment the global index
                 index++;
@@ -1180,10 +1184,10 @@ public:
         real_t dist_max;
         real_t cell_nodes[24];
         
-        auto vert1 = view_c_array <real_t> (cell_nodes, num_nodes_hex_, 3);
+        auto vert1 = ViewCArray <real_t> (cell_nodes, num_nodes_hex_, 3);
         
         real_t distance[28]; 
-        auto dist = view_c_array <real_t> (distance, 28);
+        auto dist = ViewCArray <real_t> (distance, 28);
 
         for (int cell_gid = 0; cell_gid < num_cells_; cell_gid++){
             
@@ -1427,7 +1431,7 @@ public:
                 num_elems_in_node_[node_gid] += 1;
 
                 // add nodes in element here
-                nodes_in_elem(elem_gid, gauss_lid) = node_gid;
+                nodes_in_elem_list_(elem_gid, gauss_lid) = node_gid;
             }
         }
 
@@ -1485,7 +1489,7 @@ public:
         int num_elem_elem_saved[num_cells_]; // local variable
         for (int elem_gid = 0; elem_gid < num_elem_; elem_gid++){
             
-            num_elems_in_elem_[elem_gid] = 0;
+            num_elems_in_elem_(elem_gid) = 0;
             num_elem_elem_saved[elem_gid] = 0;
         }
         
@@ -1495,7 +1499,7 @@ public:
             for (int node_lid = 0; node_lid < num_nodes_in_elem_; node_lid++){
                 
                 // get the global node id
-                int node_gid = nodes_in_elem(elem_gid, node_lid);
+                int node_gid = nodes_in_elem_list_(elem_gid, node_lid);
                 
                 // loop over all cells connected to node_gid
                 for (int elem_lid = 0; elem_lid < num_elems_in_node_[node_gid]; elem_lid++){
@@ -1509,7 +1513,7 @@ public:
                         num_e_e_pairs ++;
                         
                         // increment the number of elem_elem pairs for this element
-                        num_elems_in_elem_[elem_gid] ++;
+                        num_elems_in_elem_(elem_gid) ++;
                         
                     } // end if neighbor_cell_id
                 } // end for cell_lid
@@ -1521,12 +1525,12 @@ public:
         // create memory for the list of cells around a cell (num_e_e_pairs is 2x larger than needed)
         int * temp_elems_in_elem_list = new int [num_e_e_pairs];
         
-        elems_in_elem_list_start_[0] = 0;
+        elems_in_elem_list_start_(0) = 0;
         for (int elem_gid = 0; elem_gid < num_elem_; elem_gid++){
 
             // This is the start of the indices for the corners connected to this node
-            elems_in_elem_list_start_[elem_gid+1] = elems_in_elem_list_start_[elem_gid]
-                                                   + num_elems_in_elem_[elem_gid];
+            elems_in_elem_list_start_(elem_gid+1) = elems_in_elem_list_start_(elem_gid)
+                                                   + num_elems_in_elem_(elem_gid);
         }
         
 
@@ -1535,7 +1539,7 @@ public:
             for (int node_lid = 0; node_lid < num_nodes_in_elem_; node_lid++){
                 
                 // get the global node id
-                int node_gid = nodes_in_elem(elem_gid, node_lid);
+                int node_gid = nodes_in_elem_list_(elem_gid, node_lid);
                 
                 // loop over all cells connected to node_gid
                 for (int elem_lid = 0; elem_lid < num_elems_in_node_[node_gid]; elem_lid++){
@@ -1543,7 +1547,7 @@ public:
                     int neighbor_elem_gid = elems_in_node(node_gid, elem_lid);
                     
                     // the global index in the cells_in_cell_list_
-                    int index = elems_in_elem_list_start_[elem_gid] + num_elem_elem_saved[elem_gid];
+                    int index = elems_in_elem_list_start_(elem_gid) + num_elem_elem_saved[elem_gid];
                     
                     int save = 1; // a flag to save (=1) or not (=0)
                     
@@ -1553,7 +1557,7 @@ public:
                     } // end if neighbor_elem_gid
                     
                     // check to see if neighbor_id has been saved already
-                    for (int i = elems_in_elem_list_start_[elem_gid]; i < index; i++){
+                    for (int i = elems_in_elem_list_start_(elem_gid); i < index; i++){
                         
                         if (neighbor_elem_gid == temp_elems_in_elem_list[i]){
                             save=0;   // don't save, it has been saved already
@@ -1580,15 +1584,15 @@ public:
         
         
         // create memory for the list of cells around a cell
-        elems_in_elem_list_ = new int [actual_size];
+        elems_in_elem_list_ = CArray <int> (actual_size);
 
         // update the number of cells around a cell (because the estimate had duplicates)
         int index = 0;
-        elems_in_elem_list_[0] = 0;
+        elems_in_elem_list_(0) = 0;
         
         for (int elem_gid = 0; elem_gid < num_elem_; elem_gid++){
             
-            num_elems_in_elem_[elem_gid] = num_elem_elem_saved[elem_gid];
+            num_elems_in_elem_(elem_gid) = num_elem_elem_saved[elem_gid];
             
             // note: there is a buffer in the temp_cell_in_cell_list that is not
             // in num_elems_in_elem_ (it is smaller) so I will copying the
@@ -1596,16 +1600,16 @@ public:
             // array to use num_elem_elem_saved[elem_gid]
             
             // the global index range in the temp_cell_in_cell_list
-            int list_start = elems_in_elem_list_start_[elem_gid];
+            int list_start = elems_in_elem_list_start_(elem_gid);
             int list_stop  = list_start + num_elem_elem_saved[elem_gid];
             
-            elems_in_elem_list_start_[elem_gid] = index; // update the index
+            elems_in_elem_list_start_(elem_gid) = index; // update the index
             
             // save the neighbors to the list
             for (int i = list_start; i < list_stop; i++){
                 
                 // save neighboring elem_gid to the final list
-                elems_in_elem_list_[index] = temp_elems_in_elem_list[i];
+                elems_in_elem_list_(index) = temp_elems_in_elem_list[i];
                 
                 // increment the global index
                 index++;
@@ -1839,19 +1843,9 @@ public:
     ~mesh_t ( ) {
         
         // ---- ELEMENTS ---- //
-        delete[] cells_in_elem_;
-        delete[] num_elems_in_elem_;
-        delete[] elems_in_elem_list_start_;
-        delete[] elems_in_elem_list_;
-        delete[] nodes_in_elem_list_;
 
 
         // ---- CELLS ---- //
-        delete[] nodes_in_cell_list_;
-        delete[] num_cells_in_cell_;
-        delete[] cells_in_cell_list_start_;
-        delete[] cells_in_cell_list_;
-        delete[] elems_in_cell_list_;
 
 
         // ---- VERTICES ---- //
@@ -1938,88 +1932,88 @@ namespace swage{
 
     // setting gauss quadrature points for 2D elements
     void gauss_2d(
-        view_c_array <real_t> &these_g_pts,     // gauss points
-        view_c_array <real_t> &these_weights,   // gauss weights
-        view_c_array <real_t> &tot_g_weight,    // 2D product of gauss weights
+        ViewCArray <real_t> &these_g_pts,     // gauss points
+        ViewCArray <real_t> &these_weights,   // gauss weights
+        ViewCArray <real_t> &tot_g_weight,    // 2D product of gauss weights
         int &quad_order);                       // quadrature order (n)
 
     // setting gauss quadrature points for 2D elements
     void gauss_3d(
-        view_c_array <real_t> &these_g_pts,   // gauss points
-        view_c_array <real_t> &these_weights, // gauss weights
-        view_c_array <real_t> &tot_g_weight,  // 3D product of gauss weights
+        ViewCArray <real_t> &these_g_pts,   // gauss points
+        ViewCArray <real_t> &these_weights, // gauss weights
+        ViewCArray <real_t> &tot_g_weight,  // 3D product of gauss weights
         int &quad_order);                     // quadrature order (n)
 
     // setting gauss quadrature points for 4D elements
     void gauss_4d(
-        view_c_array <real_t> &these_g_pts,     // gauss points
-        view_c_array <real_t> &these_weights,   // gauss weights
+        ViewCArray <real_t> &these_g_pts,     // gauss points
+        ViewCArray <real_t> &these_weights,   // gauss weights
         int &quad_order,                        // quadrature order (n)
         const int &dim);
 
     // setting Gauss-Lobatto quadrature points for 2D elements
     void lobatto_2d(
-        view_c_array <real_t> &these_L_pts,     // gauss points
-        view_c_array <real_t> &these_weights,   // gauss weights
+        ViewCArray <real_t> &these_L_pts,     // gauss points
+        ViewCArray <real_t> &these_weights,   // gauss weights
         int &quad_order);                       // quadrature order (n)
 
     // setting Gauss-Lobatto quadrature points for 3D elements
     void lobatto_3d(
-        view_c_array <real_t> &these_L_pts,     // gauss points
-        view_c_array <real_t> &these_weights,   // gauss weights
+        ViewCArray <real_t> &these_L_pts,     // gauss points
+        ViewCArray <real_t> &these_weights,   // gauss weights
         int &quad_order); 
 
     // setting gauss quadrature points for 4D elements
     void lobatto_4d(
-        view_c_array <real_t> &these_L_pts,     // gauss points
-        view_c_array <real_t> &these_weights,   // gauss weights
+        ViewCArray <real_t> &these_L_pts,     // gauss points
+        ViewCArray <real_t> &these_weights,   // gauss weights
         int &quad_order,                        // quadrature order (n)
         const int &dim);
 
     //defining the jacobian for 2D elements
     void jacobian_2d(
-        view_c_array <real_t> &J_matrix, 
+        ViewCArray <real_t> &J_matrix, 
         real_t &det_J,
-        const view_c_array <real_t> &vertices, 
-        const view_c_array <real_t> &this_partial,
+        const ViewCArray <real_t> &vertices, 
+        const ViewCArray <real_t> &this_partial,
         const int &num_nodes);
 
     //defining the jacobian for 3D elements
     void jacobian_3d(
-        view_c_array <real_t> &J_matrix, 
+        ViewCArray <real_t> &J_matrix, 
         real_t &det_J,
-        const view_c_array <real_t> &vertices, 
-        const view_c_array <real_t> &this_partial,
+        const ViewCArray <real_t> &vertices, 
+        const ViewCArray <real_t> &this_partial,
         const int &num_nodes);
 
     //defining the jacobian for 4D elements
     void jacobian_4d(
-        view_c_array <real_t> &J_matrix, 
+        ViewCArray <real_t> &J_matrix, 
         real_t &det_J,
-        const view_c_array <real_t> &vertices, 
-        const view_c_array <real_t> &this_partial,
+        const ViewCArray <real_t> &vertices, 
+        const ViewCArray <real_t> &this_partial,
         const int &num_nodes,
         const int &dim);
 
     //defining the inverse jacobian for 2D element    
     void jacobian_inverse_2d(
-        view_c_array <real_t> &J_inverse, 
-        const view_c_array <real_t> &jacobian);
+        ViewCArray <real_t> &J_inverse, 
+        const ViewCArray <real_t> &jacobian);
 
     //defining the inverse jacobian for 2D element    
     void jacobian_inverse_3d(
-        view_c_array <real_t> &J_inverse_matrix,
-        const view_c_array <real_t> &jacobian);
+        ViewCArray <real_t> &J_inverse_matrix,
+        const ViewCArray <real_t> &jacobian);
 
     // defining  the inverse of the Jacobian for 4D elements
     void jacobian_inverse_4d(
-        view_c_array <real_t> &J_inverse_matrix,
-        const view_c_array <real_t> &jacobian,
+        ViewCArray <real_t> &J_inverse_matrix,
+        const ViewCArray <real_t> &jacobian,
         const real_t &det_J);
 
     // creates nodal positions with Chebyshev spacing
     void chebyshev_nodes_1D(
-        view_c_array <real_t> &cheb_nodes_1D,   // Chebyshev nodes
+        ViewCArray <real_t> &cheb_nodes_1D,   // Chebyshev nodes
         const int &order);                      // Interpolation order
 
 
@@ -2031,25 +2025,25 @@ namespace swage{
 
         // calculate a physical position in an element for a given xi,eta
         virtual void physical_position(
-            view_c_array <real_t>  &x_point,
-            const view_c_array <real_t>  &xi_point,
-            const view_c_array <real_t> &vertices) = 0;
+            ViewCArray <real_t>  &x_point,
+            const ViewCArray <real_t>  &xi_point,
+            const ViewCArray <real_t> &vertices) = 0;
 
         // calculate the value for the basis at each node for a given xi,eta
         virtual void basis(
-            view_c_array <real_t>  &basis,
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &basis,
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Xi
         virtual void  partial_xi_basis(
-            view_c_array <real_t>  &partial_xi, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &partial_xi, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
 
         // Partial derivative of shape functions with respect to Xi
         virtual void  partial_eta_basis(
-            view_c_array <real_t> &partial_eta, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_eta, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Map from vertex to node
         virtual inline int vert_node_map( const int vert_lid) = 0;
@@ -2064,29 +2058,29 @@ namespace swage{
 
         // calculate a physical position in an element for a given xi,eta,mu
         virtual void physical_position(
-            view_c_array <real_t>  &x_point,
-            const view_c_array <real_t>  &xi_point,
-            const view_c_array <real_t> &vertices) = 0;
+            ViewCArray <real_t>  &x_point,
+            const ViewCArray <real_t>  &xi_point,
+            const ViewCArray <real_t> &vertices) = 0;
 
         // calculate the value for the basis at each node for a given xi,eta, mu
         virtual void basis(
-            view_c_array <real_t>  &basis,
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &basis,
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Xi at Xi_point
         virtual void partial_xi_basis(
-            view_c_array <real_t>  &partial_xi, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &partial_xi, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Eta
         virtual void partial_eta_basis(
-            view_c_array <real_t> &partial_eta, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_eta, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Mu
         virtual void partial_mu_basis(
-            view_c_array <real_t> &partial_mu, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_mu, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Map from vertex to node
         virtual inline int vert_node_map( const int vert_lid) = 0;
@@ -2099,34 +2093,34 @@ namespace swage{
 
         // calculate a physical position in an element for a given xi,eta,mu,tau
         virtual void physical_position(
-            view_c_array <real_t>  &x_point,
-            const view_c_array <real_t>  &xi_point,
-            const view_c_array <real_t> &vertices) = 0;
+            ViewCArray <real_t>  &x_point,
+            const ViewCArray <real_t>  &xi_point,
+            const ViewCArray <real_t> &vertices) = 0;
 
         // calculate the value for the basis at each node for a given xi,eta,mu,tau
         virtual void basis(
-            view_c_array <real_t>  &basis,
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &basis,
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Xi at Xi_point
         virtual void partial_xi_basis(
-            view_c_array <real_t>  &partial_xi, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t>  &partial_xi, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Eta
         virtual void partial_eta_basis(
-            view_c_array <real_t> &partial_eta, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_eta, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Mu
         virtual void partial_mu_basis(
-            view_c_array <real_t> &partial_mu, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_mu, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
         // Partial derivative of shape functions with respect to Tau
         virtual void partial_tau_basis(
-            view_c_array <real_t> &partial_tau, 
-            const view_c_array <real_t>  &xi_point) = 0;
+            ViewCArray <real_t> &partial_tau, 
+            const ViewCArray <real_t>  &xi_point) = 0;
 
 
     }; // end of 3D parent class
@@ -2179,26 +2173,26 @@ namespace swage{
             
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point); 
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point); 
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid) = 0;
@@ -2242,26 +2236,26 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point);
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid) = 0;
@@ -2304,26 +2298,26 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point);
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid) = 0;
@@ -2370,33 +2364,33 @@ namespace swage{
             // calculates the basis values and derivatives in 1D
             // used in the basis_partials functiosn to build the 3D element
             void lagrange_1D(
-                view_c_array <real_t> &interp,          // interpolant
-                view_c_array <real_t> &Dinterp,         // derivative of function
+                ViewCArray <real_t> &interp,          // interpolant
+                ViewCArray <real_t> &Dinterp,         // derivative of function
                 const real_t &x_point,                  // point of interest in element
-                const view_c_array <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
+                const ViewCArray <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
                 const int &orderN);                     // order of element
 
             void corners (
-                view_c_array <real_t> &lag_nodes,   // Nodes of Lagrange elements 
-                view_c_array <real_t> &lag_corner,  // corner nodes of HexN element
+                ViewCArray <real_t> &lag_nodes,   // Nodes of Lagrange elements 
+                ViewCArray <real_t> &lag_corner,  // corner nodes of HexN element
                 const int &orderN);                 // Element order
 
             void physical_position (
-                view_c_array <real_t> &x_point,             // location in real space
-                const view_c_array <real_t> &lag_nodes,     // Nodes of Lagrange elements 
-                const view_c_array <real_t> &lag_basis_2d,  // 2D basis values 
+                ViewCArray <real_t> &x_point,             // location in real space
+                const ViewCArray <real_t> &lag_nodes,     // Nodes of Lagrange elements 
+                const ViewCArray <real_t> &lag_basis_2d,  // 2D basis values 
                 const int &orderN);                         // order of the element
 
             void basis_partials (
-                view_c_array <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
-                view_c_array <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
-                view_c_array <real_t> &val_1d,          // Interpolant Value in 1D
-                view_c_array <real_t> &DVal_1d,         // Derivateive of basis in 1D
-                view_c_array <real_t> &val_2d,          // for holding the interpolant in each direction
-                view_c_array <real_t> &DVal_2d,         // for holding the derivatives in each direction
-                view_c_array <real_t> &lag_basis_2d,    // 2D basis values 
-                view_c_array <real_t> &lag_partial,     // Partial of basis 
-                const view_c_array <real_t> &xi_point,  // point of interest
+                ViewCArray <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
+                ViewCArray <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
+                ViewCArray <real_t> &val_1d,          // Interpolant Value in 1D
+                ViewCArray <real_t> &DVal_1d,         // Derivateive of basis in 1D
+                ViewCArray <real_t> &val_2d,          // for holding the interpolant in each direction
+                ViewCArray <real_t> &DVal_2d,         // for holding the derivatives in each direction
+                ViewCArray <real_t> &lag_basis_2d,    // 2D basis values 
+                ViewCArray <real_t> &lag_partial,     // Partial of basis 
+                const ViewCArray <real_t> &xi_point,  // point of interest
                 const int &orderN);                     // Element order
     };
 
@@ -2455,31 +2449,31 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point);
 
             // with repsect to Mu
             void partial_mu_basis(
-                view_c_array <real_t> &partial_mu, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_mu, 
+                const ViewCArray <real_t>  &xi_point);
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid);
@@ -2525,31 +2519,31 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point);
 
             // with repsect to Mu
             void partial_mu_basis(
-                view_c_array <real_t> &partial_mu, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_mu, 
+                const ViewCArray <real_t>  &xi_point);
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid);
@@ -2602,31 +2596,31 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta
             void physical_position(
-                view_c_array <real_t>  &x_point, 
-                const view_c_array <real_t>  &xi_point, 
-                const view_c_array <real_t>  &vertices);
+                ViewCArray <real_t>  &x_point, 
+                const ViewCArray <real_t>  &xi_point, 
+                const ViewCArray <real_t>  &vertices);
 
 
             // calculate the value for the basis at each node for a given xi,eta
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi
             void  partial_xi_basis(
-                view_c_array <real_t>  &partial_xi, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &partial_xi, 
+                const ViewCArray <real_t>  &xi_point);
 
 
             // Partial derivative of shape functions with respect to Eta
             void  partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t>  &xi_point);
 
             // with repsect to Mu
             void partial_mu_basis(
-                view_c_array <real_t> &partial_mu, 
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t> &partial_mu, 
+                const ViewCArray <real_t>  &xi_point);
 
             // Map from vertex to node
             inline int vert_node_map( const int vert_lid);
@@ -2672,39 +2666,39 @@ namespace swage{
 
             // creates nodal positions with Chebyshev spacing
             void chebyshev_nodes_1D(
-                view_c_array <real_t> &cheb_nodes_1D,   // Chebyshev nodes
+                ViewCArray <real_t> &cheb_nodes_1D,   // Chebyshev nodes
                 const int &order);                      // Interpolation order
 
             // calculates the basis values and derivatives in 1D
             // used in the basis_partials functiosn to build the 3D element
             void lagrange_1D(
-                view_c_array <real_t> &interp,          // interpolant
-                view_c_array <real_t> &Dinterp,         // derivative of function
+                ViewCArray <real_t> &interp,          // interpolant
+                ViewCArray <real_t> &Dinterp,         // derivative of function
                 const real_t &x_point,                  // point of interest in element
-                const view_c_array <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
+                const ViewCArray <real_t> &xi_point,  // nodal positions in 1D, normally chebyshev
                 const int &orderN);                     // order of element
 
             void corners (
-                view_c_array <real_t> &lag_nodes,   // Nodes of Lagrange elements 
-                view_c_array <real_t> &lag_corner,  // corner nodes of HexN element
+                ViewCArray <real_t> &lag_nodes,   // Nodes of Lagrange elements 
+                ViewCArray <real_t> &lag_corner,  // corner nodes of HexN element
                 const int &orderN);                 // Element order
 
             void physical_position (
-                view_c_array <real_t> &x_point,             // location in real space
-                const view_c_array <real_t> &lag_nodes,     // Nodes of Lagrange elements 
-                const view_c_array <real_t> &lag_basis_3d,  // 3D basis values 
+                ViewCArray <real_t> &x_point,             // location in real space
+                const ViewCArray <real_t> &lag_nodes,     // Nodes of Lagrange elements 
+                const ViewCArray <real_t> &lag_basis_3d,  // 3D basis values 
                 const int &orderN);                         // order of the element
 
             void basis_partials (
-                view_c_array <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
-                view_c_array <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
-                view_c_array <real_t> &val_1d,          // Interpolant Value in 1D
-                view_c_array <real_t> &DVal_1d,         // Derivateive of basis in 1D
-                view_c_array <real_t> &val_3d,          // for holding the interpolant in each direction
-                view_c_array <real_t> &DVal_3d,         // for holding the derivatives in each direction
-                view_c_array <real_t> &lag_basis_3d,    // 3D basis values 
-                view_c_array <real_t> &lag_partial,     // Partial of basis 
-                const view_c_array <real_t> &xi_point,  // point of interest
+                ViewCArray <real_t> &lag_nodes,       // Nodes of Lagrange elements (to be filled in)
+                ViewCArray <real_t> &nodes_1d,        // Nodal spacing in 1D, any spacing is accepted
+                ViewCArray <real_t> &val_1d,          // Interpolant Value in 1D
+                ViewCArray <real_t> &DVal_1d,         // Derivateive of basis in 1D
+                ViewCArray <real_t> &val_3d,          // for holding the interpolant in each direction
+                ViewCArray <real_t> &DVal_3d,         // for holding the derivatives in each direction
+                ViewCArray <real_t> &lag_basis_3d,    // 3D basis values 
+                ViewCArray <real_t> &lag_partial,     // Partial of basis 
+                const ViewCArray <real_t> &xi_point,  // point of interest
                 const int &orderN);                     // Element order
     };
 
@@ -2774,34 +2768,34 @@ namespace swage{
 
             // calculate a physical position in an element for a given xi,eta,mu
             void physical_position(
-                view_c_array <real_t> &x_point,
-                const view_c_array <real_t> &xi_point,
-                const view_c_array <real_t> &vertices);
+                ViewCArray <real_t> &x_point,
+                const ViewCArray <real_t> &xi_point,
+                const ViewCArray <real_t> &vertices);
             
             // calculate the value for the basis at each node for a given xi,eta,mu,tau
             void basis(
-                view_c_array <real_t>  &basis,
-                const view_c_array <real_t>  &xi_point);
+                ViewCArray <real_t>  &basis,
+                const ViewCArray <real_t>  &xi_point);
 
             // Partial derivative of shape functions with respect to Xi at Xi_point
             void partial_xi_basis(
-                view_c_array <real_t> &partial_xi, 
-                const view_c_array <real_t> &xi_point);
+                ViewCArray <real_t> &partial_xi, 
+                const ViewCArray <real_t> &xi_point);
 
             // Partial derivative of shape functions with respect to Eta
             void partial_eta_basis(
-                view_c_array <real_t> &partial_eta, 
-                const view_c_array <real_t> &xi_point);
+                ViewCArray <real_t> &partial_eta, 
+                const ViewCArray <real_t> &xi_point);
 
             // Partial derivative of shape functions with respect to Mu
             void partial_mu_basis(
-                view_c_array <real_t> &partial_mu, 
-                const view_c_array <real_t> &xi_point);
+                ViewCArray <real_t> &partial_mu, 
+                const ViewCArray <real_t> &xi_point);
 
             // Partial derivative of shape functions with respect to Tau
             void partial_tau_basis(
-                view_c_array <real_t> &partial_tau, 
-                const view_c_array <real_t> &xi_point);                                          
+                ViewCArray <real_t> &partial_tau, 
+                const ViewCArray <real_t> &xi_point);                                          
     }; // End of Tess16 Element Class
 
 
