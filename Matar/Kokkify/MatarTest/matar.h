@@ -1079,6 +1079,9 @@ public:
     // Overload copy assignment operator
     CArray& operator= (const CArray& temp); 
 
+    // Resize function?
+    void resize(size_t new_size);
+
     size_t size() const;
 
     // Deconstructor
@@ -1269,6 +1272,10 @@ inline CArray<T>& CArray<T>::operator= (const CArray& temp)
         this_array_ = new T[length_];
     }
     return *this;
+}
+
+template <typename T>
+void CArray<T>::resize(size_t new_size) {
 }
 
 //return size
@@ -5159,38 +5166,32 @@ RaggedDownArrayKokkos<T>::~RaggedDownArrayKokkos() { }
 // Inherited Class Array
 //////////////////////////
 
+/*
 //template<class T, class Layout, class ExecSpace>
 template<typename T>
-class InheritedArray2L {
+class InheritedArrayL1 {
 
     using TArray1D = Kokkos::View<T*, Layout, ExecSpace>;
 
 private:
-    size_t dim1_, length_;
 
 public:
     TArray1D this_array_;
-    typename Kokkos::View<T*, Layout, ExecSpace>::HostMirror  h_this_array_;
 
-    InheritedArray2L();
+    InheritedArrayL1();
     
-    InheritedArray2L(size_t some_dim1);
+    InheritedArrayL1(size_t some_dim1);
 
     KOKKOS_FUNCTION
-    T& operator()(size_t i, size_t dest) const;
+    T& operator()() const;
 
-    template <typename U>
-    void AllocateHost(size_t size, U *obj);
-
-    void AllocateGPU();
-
-    template <typename U, typename V>
-    void InitModels(U *obj, V input);
+    template <U typename>
+    void InitModels(U *obj);
 
     template <typename U>
     void ClearModels(U obj);
 
-    InheritedArray2L& operator=(const InheritedArray2L& temp);
+    InheritedArrayL1& operator=(const InheritedArrayL1& temp);
 
     // GPU Method
     // Method that returns size
@@ -5206,49 +5207,35 @@ public:
 
     // Deconstructor
     KOKKOS_FUNCTION
-    ~InheritedArray2L ();
-}; // End of InheritedArray2L
+    ~InheritedArrayL1 ();
+}; // End of InheritedArrayL1
 
 // Default constructor
 template <typename T>
-InheritedArray2L<T>::InheritedArray2L() {}
+InheritedArrayL1<T>::InheritedArrayL1() {}
 
 // Overloaded 1D constructor
 template <typename T>
-InheritedArray2L<T>::InheritedArray2L(size_t some_dim1) {
+InheritedArrayL1<T>::InheritedArrayL1(size_t some_dim1) {
     using TArray1D = Kokkos::View<T*, Layout, ExecSpace>;
     
-    dim1_ = some_dim1;
-    length_ = dim1_;
-    this_array_ = TArray1D("this_array_", length_);
-    h_this_array_ = Kokkos::create_mirror_view(this_array_);
 }
 
 template <typename T>
 KOKKOS_FUNCTION
-T& InheritedArray2L<T>::operator()(size_t i, size_t dest) const {
-    assert(i < dim1_ && "i is out of bounds in InheritedArray2L 1D!");
-    assert(dest < 2 && "dest is out of bounds in InheritedArray2L 1D!");
-    if (dest == 0)
-        return h_this_array_(i);
-    else
-        return this_array_(i);
+T& InheritedArrayL1<T>::operator()() const {
+    return this_array_(1);
 }
 
-template <typename T>
-template <typename U>
-void InheritedArray2L<T>::AllocateHost(size_t size, U *obj) {
-    obj = (U *) kmalloc(size);
-}
 
 template <typename T>
-void InheritedArray2L<T>::AllocateGPU() {
+void InheritedArrayL1<T>::AllocateGPU() {
     Kokkos::deep_copy(this_array_, h_this_array_);
 }
 
 template <typename T>
-template <typename U, typename V>
-void InheritedArray2L<T>::InitModels(U *obj, V input) {
+template <typename U>
+void InheritedArrayL1<T>::InitModels(U *obj) {
     Kokkos::parallel_for(
             "CreateObjects", 1, KOKKOS_CLASS_LAMBDA(const int&) {
                 new ((V *)obj) V{input};
@@ -5257,7 +5244,7 @@ void InheritedArray2L<T>::InitModels(U *obj, V input) {
 
 template <typename T>
 template <typename U>
-void InheritedArray2L<T>::ClearModels(U obj) {
+void InheritedArrayL1<T>::ClearModels(U obj) {
     Kokkos::parallel_for(
             "DestroyObjects", 1, KOKKOS_LAMBDA(const int&) {
               this_array_(0).obj->~U();
@@ -5266,7 +5253,7 @@ void InheritedArray2L<T>::ClearModels(U obj) {
 }
 
 template <typename T>
-InheritedArray2L<T>& InheritedArray2L<T>::operator= (const InheritedArray2L& temp) {
+InheritedArrayL1<T>& InheritedArrayL1<T>::operator= (const InheritedArrayL1& temp) {
     using TArray1D = Kokkos::View<T *,Layout,ExecSpace>;
     
     // Do nothing if the assignment is of the form x = x
@@ -5282,26 +5269,194 @@ InheritedArray2L<T>& InheritedArray2L<T>::operator= (const InheritedArray2L& tem
 // Return size
 template <typename T>
 KOKKOS_FUNCTION
-size_t InheritedArray2L<T>::size() {
+size_t InheritedArrayL1<T>::size() {
     return length_;
 }
 
 template <typename T>
-size_t InheritedArray2L<T>::extent() {
+size_t InheritedArrayL1<T>::extent() {
     return length_;
 }
 
 template <typename T>
-T* InheritedArray2L<T>::pointer() {
+T* InheritedArrayL1<T>::pointer() {
     return this_array_.data();
 }
 
 template <typename T>
 KOKKOS_FUNCTION
-InheritedArray2L<T>::~InheritedArray2L() {}
+InheritedArrayL1<T>::~InheritedArrayL1() {}
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
-// End of InheritedArray2L
+// End of InheritedArrayL1
+////////////////////////////////////////////////////////////////////////////////
+
+//template<class T, class Layout, class ExecSpace>
+template<typename T>
+class InheritedArrayUL {
+
+    using TArray1D = Kokkos::View<T*, Layout, ExecSpace>;
+
+private:
+    size_t dim1_, length_;
+
+public:
+    TArray1D this_array_;
+    typename Kokkos::View<T*, Layout, ExecSpace>::HostMirror  h_this_array_;
+
+    InheritedArrayUL();
+    
+    InheritedArrayUL(size_t some_dim1);
+
+    KOKKOS_FUNCTION
+    T& operator()(size_t i, size_t dest) const;
+
+    void AllocateGPU();
+
+    template <typename U>
+    void AllocateHost(U *model, size_t size);
+
+    template <typename U>
+    void FreeHost(U *model);
+
+    template <typename U, typename V>
+    KOKKOS_FUNCTION
+    void InitModels(U *model, V input);
+
+    template <typename U>
+    KOKKOS_FUNCTION
+    void ClearModels(U *model);
+
+    InheritedArrayUL& operator=(const InheritedArrayUL& temp);
+
+    // GPU Method
+    // Method that returns size
+    KOKKOS_FUNCTION
+    size_t size();
+
+    // Host Method
+    // Method that returns size
+    size_t extent();
+
+    // Methods returns the raw pointer of the Kokkos View
+    T* pointer();
+
+    // Methods returns the raw pointerof the Kokkos Host View
+    T* host_pointer();
+
+    // Deconstructor
+    KOKKOS_FUNCTION
+    ~InheritedArrayUL ();
+}; // End of InheritedArrayUL
+
+// Default constructor
+template <typename T>
+InheritedArrayUL<T>::InheritedArrayUL() {}
+
+// Overloaded 1D constructor
+template <typename T>
+InheritedArrayUL<T>::InheritedArrayUL(size_t some_dim1) {
+    using TArray1D = Kokkos::View<T*, Layout, ExecSpace>;
+    
+    dim1_ = some_dim1;
+    length_ = dim1_;
+    this_array_ = TArray1D("this_array_", length_);
+    h_this_array_ = Kokkos::create_mirror_view(this_array_);
+}
+
+template <typename T>
+KOKKOS_FUNCTION
+T& InheritedArrayUL<T>::operator()(size_t i, size_t dest) const {
+    assert(i < dim1_ && "i is out of bounds in InheritedArrayUL 1D!");
+    assert(dest < 2 && "dest is out of bounds in InheritedArrayUL 1D!");
+    if (dest == 0)
+        return h_this_array_(i);
+    else
+        return this_array_(i);
+}
+
+
+template <typename T>
+void InheritedArrayUL<T>::AllocateGPU() {
+    Kokkos::deep_copy(this_array_, h_this_array_);
+}
+
+template <typename T>
+template <typename U>
+void InheritedArrayUL<T>::AllocateHost(U *model, size_t size) {
+    model = (U *) kmalloc(size);
+}
+
+template <typename T>
+template <typename U>
+void InheritedArrayUL<T>::FreeHost(U *model) {
+    kfree(model);
+}
+
+template <typename T>
+template <typename U, typename V>
+KOKKOS_FUNCTION
+void InheritedArrayUL<T>::InitModels(U *model, V input) {
+    //Kokkos::parallel_for(
+    //        "CreateObjects", 1, KOKKOS_LAMBDA(const int&) {
+                new ((V *)model) V{input};
+    //        });
+}
+
+template <typename T>
+template <typename U>
+KOKKOS_FUNCTION
+void InheritedArrayUL<T>::ClearModels(U *model) {
+    //Kokkos::parallel_for(
+    //        "CreateObjects", 1, KOKKOS_LAMBDA(const int&) {
+                model->~U();
+    //        });
+}
+
+template <typename T>
+InheritedArrayUL<T>& InheritedArrayUL<T>::operator= (const InheritedArrayUL& temp) {
+    using TArray1D = Kokkos::View<T *,Layout,ExecSpace>;
+    
+    // Do nothing if the assignment is of the form x = x
+    if (this != &temp) {
+        dim1_ = temp.dim1_;
+        length_ = temp.length_;
+        this_array_ = TArray1D("this_array_", length_);
+        h_this_array_ = Kokkos::create_mirror_view(this_array_);
+    }
+    
+    return *this;
+}
+
+// Return size
+template <typename T>
+KOKKOS_FUNCTION
+size_t InheritedArrayUL<T>::size() {
+    return length_;
+}
+
+template <typename T>
+size_t InheritedArrayUL<T>::extent() {
+    return length_;
+}
+
+template <typename T>
+T* InheritedArrayUL<T>::pointer() {
+    return this_array_.data();
+}
+
+template <typename T>
+T* InheritedArrayUL<T>::host_pointer() {
+    return h_this_array_.data();
+}
+
+template <typename T>
+KOKKOS_FUNCTION
+InheritedArrayUL<T>::~InheritedArrayUL() {}
+
+////////////////////////////////////////////////////////////////////////////////
+// End of InheritedArrayUL
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -5312,3 +5467,4 @@ InheritedArray2L<T>::~InheritedArray2L() {}
 
 
 #endif // MATAR_H
+

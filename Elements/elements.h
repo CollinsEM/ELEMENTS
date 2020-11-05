@@ -219,29 +219,28 @@ private:
     // ---- NODES ---- //
     int   num_nodes_;
 
-    int * num_cells_in_node_ = NULL;        // size of num_nodes
-    int * cells_in_node_list_start_ = NULL; // size of num_nodes+1
-    int * cells_in_node_list_ = NULL;       // size depends on mesh connectivity
-    
-    int * num_elems_in_node_ = NULL;
-    int * elems_in_node_list_start_ = NULL;
-    int * elems_in_node_list_ = NULL;
+    CArray <int> num_cells_in_node_;
+    CArray <int> cells_in_node_list_start_;
+    CArray <int> cells_in_node_list_;
+
+    CArray <int> num_elems_in_node_;
+    CArray <int> elems_in_node_list_start_;
+    CArray <int> elems_in_node_list_;
 
     // ---- GAUSS POINTS ---- //
     int   num_g_pts_;
 
-    int * node_in_gauss_list_ = NULL;
-
+    CArray <int> node_in_gauss_list_;
 
     // ---- CORNERS ---- //
     int   num_corners_;
 
-    int * num_corners_in_node_ = NULL;
+    CArray <int> num_corners_in_node_;
 
-    int * corners_in_cell_list_ = NULL;
+    CArray <int> corners_in_cell_list_;
 
-    int * corners_in_node_list_start_ = NULL;
-    int * corners_in_node_list_ = NULL;
+    CArray <int> corners_in_node_list_start_;
+    CArray <int> corners_in_node_list_;
 
     // int * corner_bdy_count_ = NULL;
 
@@ -249,41 +248,41 @@ private:
     // ---- FACES ---- //
     int   num_faces_;
 
-    int * face_nodes_list_ = NULL;       // size of num_faces*4
-    int * cells_in_face_list_ = NULL;    // size of num_faces*2
+    CArray <int> face_nodes_list_;
+    CArray <int> cells_in_face_list_;
 
 
     // ---- BOUNDARY ---- //
     int num_bdy_faces_;
     int num_bdy_sets_;
     
-    int * bdy_faces_;          // size depends on mesh
-    int * bdy_set_list_;
-    int * start_index_bdy_set_;
-    int * num_bdy_faces_set_;
+    CArray <int> bdy_faces_;
+    CArray <int> bdy_set_list_;
+    CArray <int> start_index_bdy_set_;
+    CArray <int> num_bdy_faces_set_;
 
 
 // ---- MESH GEOMETRIC STATE ---- //
 
     // ---- ELEMENT ---- //
-    real_t * elem_vol_ = NULL;  // size of num_elem
+    CArray <real_t> elem_vol_;
 
     
 
 
     // ---- CELLS ---- //
-    real_t * cell_vol_ = NULL;      // size of num_cells
-    real_t * cell_coords_ = NULL;  // size of num_cells
+    CArray <real_t> cell_vol_;
+    CArray <real_t> cell_coords_;
 
 
     // ---- NODES ---- //
-    real_t * node_coords_ = NULL;      // size of rk_storage_*num_nodes*num_dim_
+    CArray <real_t> node_coords_;
 
     
 
     // ---- QUADRATURE POINTS ---- //
-    real_t * jacobians_ = NULL;            // size of num_g_pts_*num_dim_*num_dim_
-    real_t * jacobian_determinant_ = NULL; // size of num_g_pts_
+    CArray <real_t> jacobians_;
+    CArray <real_t> jacobian_determinant_;
 
 
 public:
@@ -355,7 +354,7 @@ public:
 
         cells_in_elem_ = CArray <int> (num_elem_, num_subcells_per_elem);
 
-        elem_vol_ = new real_t[rk_storage_*num_elem_];
+        elem_vol_ = CArray <real_t> (rk_storage_, num_elem_);
 
         // WARNING: FOLLOWING CODE ASSUMES LOBATTO 
         num_nodes_in_elem_ = num_g_pts;
@@ -375,12 +374,12 @@ public:
         
         num_cells_ = ncells;
 
-        cell_vol_  = new real_t[num_cells_];
-        cell_coords_ = new real_t[num_cells_*num_dim_];
+        cell_vol_ = CArray <real_t> (num_cells_);
+        cell_coords_ = CArray <real_t> (num_cells_, num_dim_);
 
 
         nodes_in_cell_list_       = CArray <int> (num_cells_, num_nodes_hex_);
-        corners_in_cell_list_ = new int[num_cells_*num_nodes_hex_];
+        corners_in_cell_list_     = CArray <int> (num_cells_, num_nodes_hex_);
         
         num_cells_in_cell_        = CArray <int> (num_cells_);
         cells_in_cell_list_start_ = CArray <int> (num_cells_ + 1);
@@ -399,15 +398,15 @@ public:
         rk_storage_ = num_rk;
         
         num_nodes_ = num_nodes;
-        node_coords_   = new real_t[rk_storage_*num_nodes_*num_dim_];
+        node_coords_              = CArray <real_t> (rk_storage_, num_nodes_, num_dim_);
 
-        num_cells_in_node_        = new int[num_nodes_];
-        cells_in_node_list_start_ = new int[num_nodes_+1];
+        num_cells_in_node_        = CArray <int> (num_nodes_);
+        cells_in_node_list_start_ = CArray <int> (num_nodes + 1);
 
-        num_corners_in_node_      = new int[num_nodes_];
+        num_corners_in_node_      = CArray <int> (num_nodes_);
 
-        num_elems_in_node_        = new int[num_nodes_];
-        elems_in_node_list_start_ = new int[num_nodes_+1];
+        num_elems_in_node_        = CArray <int> (num_nodes_);
+        elems_in_node_list_start_ = CArray <int> (num_nodes_ + 1);
     }
 
 
@@ -416,11 +415,11 @@ public:
 
         // Index maps
         num_g_pts_ = num_elem_ * num_g_pts_in_elem_;
-        node_in_gauss_list_ = new int[num_g_pts_];
+        node_in_gauss_list_ = CArray <int> (num_g_pts_);
 
         // geometric state
-        jacobians_ = new real_t[rk_storage_*num_g_pts_*num_dim_*num_dim_];
-        jacobian_determinant_ = new real_t[rk_storage_*num_g_pts_];
+        jacobians_ = CArray <real_t> (rk_storage_, num_g_pts_, num_dim_, num_dim_);
+        jacobian_determinant_ = CArray <real_t> (rk_storage_, num_g_pts_);
     }
 
 
@@ -441,9 +440,9 @@ public:
             num_sets = 1;
         }
         num_bdy_sets_ = num_sets;
-        num_bdy_faces_set_ = new int [num_sets];
-        start_index_bdy_set_ = new int [num_sets+1];
-        bdy_set_list_   = new int [num_sets*num_bdy_faces_]; // largest size possible
+        num_bdy_faces_set_ = CArray <int> (num_sets);
+        start_index_bdy_set_ = CArray <int> (num_sets + 1);
+        bdy_set_list_   = CArray <int> (num_sets * num_bdy_faces_); // largest size possible
     }
     
 
@@ -557,7 +556,7 @@ public:
     // return corners connected to a cell
     inline int& corners_in_cell (int cell_gid, int corner_lid) const
     {
-        return corners_in_cell_list_[corner_lid + cell_gid*num_nodes_hex_];
+        return corners_in_cell_list_(cell_gid, corner_lid);
     }
 
 
@@ -583,13 +582,14 @@ public:
     // returns number of cells around a node
     inline int& num_cells_in_node (int node_gid) const
     {
-        return num_cells_in_node_[node_gid];
+        return num_cells_in_node_(node_gid);
     }
     
     // returns number of elements around a node
     inline int& num_elems_in_node (int node_gid) const
     {
-        return num_elems_in_node_[node_gid];
+        //return num_elems_in_node_[node_gid];
+        return num_elems_in_node_(node_gid);
     }
 
 
@@ -597,24 +597,24 @@ public:
     inline int& cells_in_node (int node_gid, int cell_lid) const
     {
         // shift index by 1 so that it is consistent with matrix syntax
-        int start_indx = cells_in_node_list_start_[node_gid];
+        int start_indx = cells_in_node_list_start_(node_gid);
         
         // get the index in the global 1D array
         int index = start_indx + cell_lid;
         
-        return cells_in_node_list_[index];
+        return cells_in_node_list_(index);
     }
 
     // return the elements around a node
     inline int& elems_in_node (int node_gid, int elem_lid) const
     {
         // shift index by 1 so that it is consistent with matrix syntax
-        int start_indx = elems_in_node_list_start_[node_gid];
+        int start_indx = elems_in_node_list_start_(node_gid);
         
         // get the index in the global 1D array
         int index = start_indx + elem_lid;
         
-        return elems_in_node_list_[index];
+        return elems_in_node_list_(index);
     }
         
 
@@ -630,7 +630,7 @@ public:
     // return gauss to node map
     inline int& node_in_gauss (int gauss_gid) const
     {            
-        return node_in_gauss_list_[gauss_gid];
+        return node_in_gauss_list_(gauss_gid);
     }
 
     // return gauss in element map (internal structured grid)
@@ -654,7 +654,7 @@ public:
     // return number of corners connected to a node
     inline int num_corners_in_node (int node_gid) const
     {
-        return num_corners_in_node_[node_gid];
+        return num_corners_in_node_(node_gid);
     }
 
     // return corner to node map
@@ -662,12 +662,12 @@ public:
     {
         // Note: cell_in_node_list_start_ is the exact same as 
         //       corner_in_node_list_start_
-        int start_indx = cells_in_node_list_start_[node_gid];
+        int start_indx = cells_in_node_list_start_(node_gid);
 
         // get the index in the global 1D array
         int index = start_indx + corner_lid;
 
-        return corners_in_node_list_[index];
+        return corners_in_node_list_(index);
     }
 
 
@@ -703,7 +703,7 @@ public:
         int this_index = face_gid*2 + this_cell;  // this_cell = 0 or 1
 
         // return the global id for the cell
-        return cells_in_face_list_[this_index];
+        return cells_in_face_list_(this_index);
     }
           
     // returns the nodes in the face
@@ -713,7 +713,7 @@ public:
         int this_index = face_gid*4;
         
         // facenode_lid is in the range of 0:3
-        return face_nodes_list_[this_index + facenode_lid];
+        return face_nodes_list_(this_index + facenode_lid);
     }
 
 
@@ -731,21 +731,22 @@ public:
 
     inline int bdy_faces(int this_bdy_face) const
     {
-        return bdy_faces_[this_bdy_face];
+        //return bdy_faces_[this_bdy_face];
+        return bdy_faces_(this_bdy_face);
     }
 
     // returns the number per bdy-faces in a particular set
     int num_bdy_faces_in_set (int bdy_set){
-        return num_bdy_faces_set_[bdy_set];
+        return num_bdy_faces_set_(bdy_set);
     }
     
     
     // returns a subset of the boundary faces
     int bdy_faces_in_set (int bdy_set, int this_face){
         
-        int start = start_index_bdy_set_[bdy_set];
+        int start = start_index_bdy_set_(bdy_set);
         
-        return bdy_set_list_[start+this_face];
+        return bdy_set_list_(start+this_face);
     }
 
 
@@ -755,7 +756,8 @@ public:
     // ---- ELEMENTS ---- //
     inline real_t& elem_vol(int rk_bin, int elem_gid) const
     {
-        return elem_vol_[rk_bin*num_elem_ + elem_gid];
+        //return elem_vol_[rk_bin*num_elem_ + elem_gid];
+        return elem_vol_(rk_bin, elem_gid);
     }
     
 
@@ -764,28 +766,28 @@ public:
     // return the cell volume
     inline real_t& cell_vol(int cell_gid) const
     {
-        return cell_vol_[cell_gid];
+        return cell_vol_(cell_gid);
     }
     
     // return the cell coordinate position
     inline real_t& cell_coords(int rk_bin, int cell_gid, int this_dim)
     {
         
-        cell_coords_[this_dim + cell_gid*num_dim_] = 0;
+        cell_coords_(cell_gid, this_dim);
         
         // #pragma omp simd
         for (int node_lid = 0; node_lid < num_nodes_hex_; node_lid++){
             
             int node_gid = nodes_in_cell(cell_gid, node_lid); // get the global_id
             
-            cell_coords_[this_dim + cell_gid*num_dim_] += node_coords(rk_bin, node_gid, this_dim);
+            cell_coords_(cell_gid, this_dim) += node_coords(rk_bin, node_gid, this_dim);
             
         } // end for loop over vertices in the cell
         
         // divide by the number of vertices
-        cell_coords_[this_dim + cell_gid*num_dim_] /= ( (real_t)num_nodes_hex_ );
+        cell_coords_(cell_gid, this_dim) /= ( (real_t)num_nodes_hex_ );
         
-        return cell_coords_[cell_gid*num_dim_ + this_dim];
+        return cell_coords_(cell_gid, this_dim);
     }
 
 
@@ -797,33 +799,23 @@ public:
     // return the node coordinates
     inline real_t& node_coords(int rk_bin, int node_gid, int this_dim) const
     {
-        return node_coords_[rk_bin*num_nodes_*num_dim_ + node_gid*num_dim_ + this_dim];
+        return node_coords_(rk_bin, node_gid, this_dim);
     }
 
 
     // ---- QUADRATURE POINTS ---- //
 
     // return jacobian at quadrature point
-    inline real_t& jacobian(int rk_bin, int elem_gid, int gauss_lid, int i, int j) const
+    inline real_t& jacobian(int rk_bin, int gauss_gid, int i, int j) const
     {
-        int index = rk_bin*num_elem_*num_g_pts_in_elem_*num_dim_*num_dim_
-                    + elem_gid*num_g_pts_in_elem_*num_dim_*num_dim_
-                    + gauss_lid*num_dim_*num_dim_
-                    + i*num_dim_
-                    + j;
-        
-        return jacobians_[index];
+        return jacobians_(rk_bin, gauss_gid, i, j);
     }
 
 
     // return determinant of jacobian at quadrature point
-    inline real_t& det_j(int rk_bin, int elem_gid, int gauss_lid) const
+    inline real_t& det_j(int rk_bin, int gauss_gid) const
     {
-        int index = rk_bin*num_elem_*num_g_pts_in_elem_
-                    + elem_gid*num_g_pts_in_elem_
-                    + gauss_lid;
-        
-        return jacobian_determinant_[index];
+        return jacobian_determinant_(rk_bin, gauss_gid);
     }
 
 
@@ -887,7 +879,7 @@ public:
         int num_corners_saved[num_nodes_]; // local variable
         for (int node_gid = 0; node_gid < num_nodes_; node_gid++){
             
-            num_cells_in_node_[node_gid] = 0;
+            num_cells_in_node_(node_gid) = 0;
             num_corners_saved[node_gid] = 0;
         }
         
@@ -903,7 +895,7 @@ public:
                 // increment the number of corners attached to this point
                 int node_gid = nodes_in_cell(cell_gid, node_lid); // get the global_id
                 
-                num_cells_in_node_[node_gid] ++;
+                num_cells_in_node_(node_gid) ++;
                 
             }  // end for this_point
         } // end for cell_gid
@@ -912,17 +904,17 @@ public:
         num_corners_ = num_corners;
 
         // create memory for a list for all cell-node pairs
-        cells_in_node_list_ = new int [num_corners];
+        cells_in_node_list_ = CArray <int> (num_corners);
         
 
         // Loop over nodes to set the start point of the ragged right array indices
         
-        cells_in_node_list_start_[0] = 0;
+        cells_in_node_list_start_(0) = 0;
         for (int node_gid = 0; node_gid < num_nodes_; node_gid++){
 
             // This is the start of the indices for the corners connected to this node
-            cells_in_node_list_start_[node_gid+1] = cells_in_node_list_start_[node_gid]
-                                                    + num_cells_in_node_[node_gid];
+            cells_in_node_list_start_(node_gid+1) = cells_in_node_list_start_(node_gid)
+                                                    + num_cells_in_node_(node_gid);
         }
         
         
@@ -939,10 +931,10 @@ public:
                 nodes_in_cell_list_(cell_gid, node_lid) = node_gid;
                 
                 // the global index in the cells_in_node_list_
-                int index = cells_in_node_list_start_[node_gid] + num_corners_saved[node_gid];
+                int index = cells_in_node_list_start_(node_gid) + num_corners_saved[node_gid];
                 
                 // save the global cell index to the list
-                cells_in_node_list_[index] = cell_gid;
+                cells_in_node_list_(index) = cell_gid;
                 
                 // each point-cell pair makes a corner
                 num_corners_saved[node_gid] ++;  //number of corners saved to this node
@@ -975,7 +967,7 @@ public:
         num_corners_ = num_corners;
 
         // create memory for a list of all corners in node
-        corners_in_node_list_ = new int [num_corners];
+        corners_in_node_list_ = CArray <int> (num_corners);
 
         // populate the cells connected to a node list and corners in a node
         int corner_gid = 0;
@@ -987,13 +979,13 @@ public:
                 int node_gid = nodes_in_cell(cell_gid, node_lid); // get the global_id of the node
                 
                 // the global index in the cells_in_node_list_
-                int index = cells_in_node_list_start_[node_gid] + num_corners_saved[node_gid];
+                int index = cells_in_node_list_start_(node_gid) + num_corners_saved[node_gid];
 
                 // each point-cell pair makes a corner
                 num_corners_saved[node_gid] ++;  //number of corners saved to this node
 
                 // Save index for corner to global cell index
-                corners_in_node_list_[index] = corner_gid;
+                corners_in_node_list_(index) = corner_gid;
 
                 int corner_lid = node_lid;
                 corners_in_cell(cell_gid, corner_lid) = corner_gid;
@@ -1005,7 +997,7 @@ public:
 
         for (int node_gid = 0; node_gid < num_nodes_; node_gid++ ){
 
-            num_corners_in_node_[node_gid] = num_corners_saved[node_gid]; 
+            num_corners_in_node_(node_gid) = num_corners_saved[node_gid]; 
         }
     } // end of build_corner_connectivity
 
@@ -1028,7 +1020,7 @@ public:
                 int node_gid = nodes_in_cell(cell_gid, node_lid);
                 
                 // loop over all cells connected to node_gid
-                for (int cell_lid = 0; cell_lid < num_cells_in_node_[node_gid]; cell_lid++){
+                for (int cell_lid = 0; cell_lid < num_cells_in_node_(node_gid); cell_lid++){
                     
                     int neighbor_cell_id = cells_in_node(node_gid, cell_lid);
                     
@@ -1068,7 +1060,7 @@ public:
                 int node_id = nodes_in_cell(cell_gid, node_lid);
                 
                 // loop over all cells connected to node_id
-                for (int cell_lid = 0; cell_lid < num_cells_in_node_[node_id]; cell_lid++){
+                for (int cell_lid = 0; cell_lid < num_cells_in_node_(node_id); cell_lid++){
                     
                     // get the global id for the neighboring cell
                     int neighbor_cell_id = cells_in_node(node_id, cell_lid);
@@ -1337,16 +1329,16 @@ public:
         num_faces_ = face_gid;
 
         // create memory for the face structures
-        cells_in_face_list_ = new int [num_faces_*2];   // two cells per face
-        face_nodes_list_    = new int [num_faces_*4];   // four nodes per face in hex
+        cells_in_face_list_ = CArray <int> (num_faces_ * 2);
+        face_nodes_list_    = CArray <int> (num_faces_ * 4);
 
         // initialize the cells_in_face_list to -1
         for (int face_gid = 0; face_gid < 2*num_faces_; face_gid++){
-            cells_in_face_list_[face_gid] = -1;
+            cells_in_face_list_(face_gid) = -1;
         }   
 
         for (int face_gid = 0; face_gid < 4*num_faces_; face_gid++){
-            face_nodes_list_[face_gid] = -1;
+            face_nodes_list_(face_gid) = -1;
         }
 
 
@@ -1374,18 +1366,18 @@ public:
                 } // end for facenode_lid
 
                 // save the cell_gid to the cells_in_face_list
-                if (cells_in_face_list_[face_gid*2] == -1){
+                if (cells_in_face_list_(face_gid*2) == -1){
                     
                     // save the cell index for this face
                     int this_index = face_gid*2;  // index in the list
                     
-                    cells_in_face_list_[this_index] = cell_gid;
+                    cells_in_face_list_(this_index) = cell_gid;
                     
                     // save the nodes for this face
                     this_index = face_gid*4;
                     
                     for (int facenode_lid = 0; facenode_lid < num_nodes_face_; facenode_lid++){
-                        face_nodes_list_[this_index + facenode_lid] = these_nodes[facenode_lid];
+                        face_nodes_list_(this_index + facenode_lid) = these_nodes[facenode_lid];
                     }
                 }
 
@@ -1394,7 +1386,7 @@ public:
 
                     int this_index = face_gid*2 + 1; // + num_faces_; // index in the list
 
-                    cells_in_face_list_[this_index] = cell_gid;
+                    cells_in_face_list_(this_index) = cell_gid;
                 }
 
                 hash_count++;
@@ -1416,7 +1408,7 @@ public:
         int times_hit[num_nodes_];
         
         for(int node_gid = 0; node_gid < num_nodes_; node_gid++){
-            num_elems_in_node_[node_gid] = 0;
+            num_elems_in_node_(node_gid) = 0;
             times_hit[node_gid] = 0;
         }
 
@@ -1428,7 +1420,7 @@ public:
                 int node_gid  = node_in_gauss(gauss_gid);
 
                 // every time the node gid is hit add one to the hit count
-                num_elems_in_node_[node_gid] += 1;
+                num_elems_in_node_(node_gid) += 1;
 
                 // add nodes in element here
                 nodes_in_elem_list_(elem_gid, gauss_lid) = node_gid;
@@ -1442,21 +1434,21 @@ public:
         // base size is the number of nodes, one is added for each double counted one
         int elem_in_node_size = 0;
         for(int node_gid = 0; node_gid < num_nodes_; node_gid++){
-            elem_in_node_size += num_elems_in_node_[node_gid];
+            elem_in_node_size += num_elems_in_node_(node_gid);
         }
 
         // get access pattern and total size of ragged right for elems_in_node
         
-        elems_in_node_list_start_[0] = 0;
+        elems_in_node_list_start_(0) = 0;
         // starts at one because zero index has been saved
         for(int node_gid = 0; node_gid < num_nodes_; node_gid++){
-            elems_in_node_list_start_[node_gid+1] = elems_in_node_list_start_[node_gid] + num_elems_in_node_[node_gid];
+            elems_in_node_list_start_(node_gid+1) = elems_in_node_list_start_(node_gid) + num_elems_in_node_(node_gid);
         }
 
         // std::cout<<"Before getting size of elems in node list"<<std::endl;
 
         // create memory for elems_in_node_list_
-        elems_in_node_list_ = new int [elem_in_node_size];
+        elems_in_node_list_ = CArray <int> (elem_in_node_size);
 
         for(int elem_gid = 0; elem_gid < num_elem_; elem_gid++){
             for(int node_lid = 0; node_lid < num_g_pts_in_elem_; node_lid++){
@@ -1465,9 +1457,9 @@ public:
                 int gauss_gid = gauss_in_elem(elem_gid, node_lid);
                 int node_gid  = node_in_gauss(gauss_gid);
 
-                int indx = elems_in_node_list_start_[node_gid] + times_hit[node_gid];
+                int indx = elems_in_node_list_start_(node_gid) + times_hit[node_gid];
 
-                elems_in_node_list_[indx] = elem_gid;
+                elems_in_node_list_(indx) = elem_gid;
 
                 times_hit[node_gid]++;
             }
@@ -1476,7 +1468,7 @@ public:
         // verify that things makes sense
         // for(int node_gid = 0; node_gid < num_nodes_; node_gid++){
 
-        //     int test = num_elems_in_node_[node_gid] - times_hit[node_gid];
+        //     int test = num_elems_in_node_(node_gid) - times_hit[node_gid];
 
         //     if (test != 0){
         //         std::cout<<"ERROR IN ELEMENTS IN NODE"<<std::endl;
@@ -1502,7 +1494,7 @@ public:
                 int node_gid = nodes_in_elem_list_(elem_gid, node_lid);
                 
                 // loop over all cells connected to node_gid
-                for (int elem_lid = 0; elem_lid < num_elems_in_node_[node_gid]; elem_lid++){
+                for (int elem_lid = 0; elem_lid < num_elems_in_node_(node_gid); elem_lid++){
                     
                     int neighbor_elem_gid = elems_in_node(node_gid, elem_lid);
 
@@ -1542,7 +1534,7 @@ public:
                 int node_gid = nodes_in_elem_list_(elem_gid, node_lid);
                 
                 // loop over all cells connected to node_gid
-                for (int elem_lid = 0; elem_lid < num_elems_in_node_[node_gid]; elem_lid++){
+                for (int elem_lid = 0; elem_lid < num_elems_in_node_(node_gid); elem_lid++){
                     
                     int neighbor_elem_gid = elems_in_node(node_gid, elem_lid);
                     
@@ -1650,7 +1642,7 @@ public:
         num_bdy_faces_ = bdy_face_gid;
         
         // allocate the memory for the boundary faces array
-        bdy_faces_ = new int[num_bdy_faces_];
+        bdy_faces_ = CArray <int> (num_bdy_faces_);
         
         
         // save the global indices for the boundary faces
@@ -1667,7 +1659,7 @@ public:
                 if (cells_in_face(face_gid, cell_lid) == -1){
                     
                     // save the face index
-                    bdy_faces_[bdy_face_gid] = face_gid;
+                    bdy_faces_(bdy_face_gid) = face_gid;
                     
                     // increment the counter
                     bdy_face_gid++;
@@ -1684,9 +1676,9 @@ public:
     // returns a subset of the boundary faces
     int set_bdy_faces (int bdy_set, int face_lid){
         
-        int start = start_index_bdy_set_[bdy_set];
+        int start = start_index_bdy_set_(bdy_set);
         
-        return bdy_set_list_[start+face_lid];
+        return bdy_set_list_(start+face_lid);
     }
     
     
@@ -1703,12 +1695,12 @@ public:
         }
         
         // the start index for the first list is zero
-        start_index_bdy_set_[0] = 0;
+        start_index_bdy_set_(0) = 0;
         
         
         // save the boundary vertices to this set that are on the plane
         int counter = 0;
-        int start = start_index_bdy_set_[bdy_set];
+        int start = start_index_bdy_set_(bdy_set);
         for (int this_bdy_face = 0; this_bdy_face < num_bdy_faces_; this_bdy_face++) {
             
             // save the face index
@@ -1718,22 +1710,22 @@ public:
             int is_on_bdy = check_bdy(bdy_face_gid, this_bc_tag, val); // no=0, yes=1
             
             if (is_on_bdy == 1){
-                bdy_set_list_[start+counter] = bdy_face_gid;
+                bdy_set_list_(start+counter) = bdy_face_gid;
                 counter ++;
             }
         } // end for bdy_face
         
         // save the number of bdy faces in the set
-        num_bdy_faces_set_[bdy_set] = counter;
+        num_bdy_faces_set_(bdy_set) = counter;
         
         // save the starting index for the next bdy_set
-        start_index_bdy_set_[bdy_set+1] = start_index_bdy_set_[bdy_set] + counter;
+        start_index_bdy_set_(bdy_set+1) = start_index_bdy_set_(bdy_set) + counter;
         
         
         // compress the list to reduce the memory if it is the last set
-        if (bdy_set == num_bdy_sets_-1){
-            compress_bdy_set();
-        }
+        //if (bdy_set == num_bdy_sets_-1){
+        //    compress_bdy_set();
+        //}
         
         std::cout << " tagged boundary faces " << std::endl;
         
@@ -1741,6 +1733,7 @@ public:
     
     
     // compress the bdy_set_list to reduce the memory
+    /*DANIELMOD
     void compress_bdy_set(){
         
         // the actual size of the bdy set list
@@ -1751,7 +1744,7 @@ public:
         
         // save the values to the temp array
         for (int i = 0; i < length; i++){
-            temp_bdy_list[i] = bdy_set_list_[i];
+            temp_bdy_list[i] = bdy_set_list_(i);
         }
         
         // delete original array and make a new one of correct size
@@ -1768,6 +1761,7 @@ public:
         delete[] temp_bdy_list;
         
     } // end of compress_bdy_set
+    */
     
     // routine for checking to see if a vertix is on a boundary
     // bc_tag = 0 xplane, 1 yplane, 3 zplane, 4 cylinder, 5 is shell
@@ -1852,52 +1846,29 @@ public:
 
         
         // ---- NODES ---- //
-        delete[] num_cells_in_node_;
-        delete[] cells_in_node_list_start_;
-        delete[] cells_in_node_list_;
 
-        delete[] num_elems_in_node_;
-        delete[] elems_in_node_list_start_;
-        delete[] elems_in_node_list_;
 
         // ---- GAUSS POINTS ---- //
-        delete[] node_in_gauss_list_;
 
 
         // ---- CORNERS ---- //
-        delete[] num_corners_in_node_;
-        delete[] corners_in_cell_list_;
-        delete[] corners_in_node_list_start_;
-        delete[] corners_in_node_list_;
 
 
         // ---- FACES ---- //
-        delete[] face_nodes_list_;       
-        delete[] cells_in_face_list_;  
 
         // ---- BOUNDARY ---- //
-        delete[] bdy_faces_;
-        delete[] bdy_set_list_;
-        delete[] start_index_bdy_set_;
-        delete[] num_bdy_faces_set_; 
 
     // ---- MESH STATE ---- //
         // ---- ELEMENT ---- //
-        delete[] elem_vol_; 
         
 
         // ---- CELLS ---- //
-        delete[] cell_vol_;
-        delete[] cell_coords_;
 
 
         // ---- NODES ---- //
-        delete[] node_coords_;
 
 
         // ---- QUADRATURE POINTS ---- //
-        delete[] jacobians_;            // size of rk_storage_*num_g_pts_*num_dim_*num_dim_
-        delete[] jacobian_determinant_; // size of rk_storage_*num_g_pts_
 
     } // end of mesh deconstructor
 

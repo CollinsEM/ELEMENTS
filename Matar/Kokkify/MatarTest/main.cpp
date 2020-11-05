@@ -58,6 +58,38 @@ int main() {
 
     FreeHost(h_parent); // Function performed on Host to free the allocated GPU classes inside of the Host mirror
 
+#define model_for Kokkos::parallel_for
+#define klamb "CreateObjects", 1, KOKKOS_LAMBDA(const int&)
+
+    InheritedArrayUL <parent_models> iarray;
+    iarray =  InheritedArrayUL <parent_models> (1);
+    iarray.AllocateHost(iarray(0, 0).child, BABY2_SIZE);
+    printf("%ld\n", sizeof(iarray(0, 0).child));
+    //model_for(klamb{
+    //printf("%ld\n", sizeof(iarray(0, 1).child));
+    //});
+    //iarray.AllocateGPU();
+    //model_for(klamb{
+    //printf("%ld\n", sizeof(iarray(0, 1).child));
+    //});
+        new ((baby2 *)iarray(0, 0).child) baby2{};
+    printf("%ld\n", sizeof(iarray(0, 0).child));
+    //Kokkos::parallel_for(
+    //        "CreateObjects", 1, KOKKOS_LAMBDA(const int&) {
+    //            new ((baby2 *)iarray(0, 1).child) baby2{};
+    //        });
+    model_for(klamb{
+        //new ((baby2 *)iarray(0, 1).child) baby2{};
+    });
+    model_for(klamb{
+    //    iarray(0, 1).child->~child_models();
+    });
+
+    //iarray.InitModels(temp_child, baby2{});
+    //iarray.ClearModels(iarray.pointer()[0].child);
+    //iarray.FreeHost(iarray.host_pointer()[0].child);
+
+#ifdef QUICKY
 
     /*
     auto partest = InheritedArray2L <parent_models> (num_parent);
@@ -309,6 +341,17 @@ int main() {
 
     std::cout << "kv_raggedright time: " << kv_raggedright_time.count() << " s." << std::endl;
 #endif 
+#endif
+    /*
+    mydeletearray.resize(really+5);
+
+
+    printf("After\n");
+    for (int i = 0; i < really+5; i++) {
+        if (i >= really) mydeletearray(i) = i;
+        printf("%d\n", mydeletearray(i));
+    }
+    */
 
     }
     Kokkos::finalize();
