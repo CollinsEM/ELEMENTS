@@ -1,0 +1,2 @@
+/usr/bin/ar qc libkelements.a  CMakeFiles/kelements.dir/elements.cpp.o
+/usr/bin/ranlib libkelements.a

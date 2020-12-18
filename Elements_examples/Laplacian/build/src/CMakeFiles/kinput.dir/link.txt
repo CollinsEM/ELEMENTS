@@ -1,0 +1,2 @@
+/usr/bin/ar qc libkinput.a  CMakeFiles/kinput.dir/input.cpp.o
+/usr/bin/ranlib libkinput.a

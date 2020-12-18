@@ -1,0 +1,832 @@
+The system is: Linux - 4.14.0-115.32.1.el7a.ppc64le - ppc64le
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/3.12.4/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/3.12.4/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_93a8b/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_93a8b.dir/build.make CMakeFiles/cmTC_93a8b.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_93a8b.dir/testCCompiler.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc    -o CMakeFiles/cmTC_93a8b.dir/testCCompiler.c.o   -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_93a8b
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93a8b.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc      -rdynamic CMakeFiles/cmTC_93a8b.dir/testCCompiler.c.o  -o cmTC_93a8b 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_486dc/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_486dc.dir/build.make CMakeFiles/cmTC_486dc.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc    -o CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o   -c /projects/opt/ppc64le/cmake/3.12.4/share/cmake-3.12/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_486dc
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_486dc.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc     -v -rdynamic CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o  -o cmTC_486dc 
+Using built-in specs.
+COLLECT_GCC=/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc
+COLLECT_LTO_WRAPPER=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none
+Target: powerpc64le-unknown-linux-gnu
+Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0
+Thread model: posix
+gcc version 9.2.0 (GCC) 
+COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/
+LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_486dc'
+ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2 -plugin /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so -plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYAoTl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -V -m elf64lppc -export-dynamic -dynamic-linker /lib64/ld64.so.2 -o cmTC_486dc /lib/../lib64/crt1.o /lib/../lib64/crti.o /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../.. CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o /lib/../lib64/crtn.o
+GNU ld version 2.27-44.base.el7
+  Supported emulations:
+   elf64lppc
+   elf32ppc
+   elf32ppclinux
+   elf32ppcsim
+   elf32lppc
+   elf32lppclinux
+   elf32lppcsim
+   elf64ppc
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_486dc'
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_486dc/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_486dc.dir/build.make CMakeFiles/cmTC_486dc.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc    -o CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o   -c /projects/opt/ppc64le/cmake/3.12.4/share/cmake-3.12/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_486dc]
+  ignore line: [/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_486dc.dir/link.txt --verbose=1]
+  ignore line: [/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc     -v -rdynamic CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o  -o cmTC_486dc ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+  ignore line: [Target: powerpc64le-unknown-linux-gnu]
+  ignore line: [Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_486dc']
+  link line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2 -plugin /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so -plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYAoTl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -V -m elf64lppc -export-dynamic -dynamic-linker /lib64/ld64.so.2 -o cmTC_486dc /lib/../lib64/crt1.o /lib/../lib64/crti.o /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../.. CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o /lib/../lib64/crtn.o]
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccWYAoTl.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-V] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf64lppc] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_486dc] ==> ignore
+    arg [/lib/../lib64/crt1.o] ==> ignore
+    arg [/lib/../lib64/crti.o] ==> ignore
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o] ==> ignore
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0]
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..]
+    arg [CMakeFiles/cmTC_486dc.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o] ==> ignore
+    arg [/lib/../lib64/crtn.o] ==> ignore
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0]
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0;/projects/opt/ppc64le/p9/gcc/9.2.0/lib64;/lib64;/usr/lib64;/projects/opt/ppc64le/p9/gcc/9.2.0/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_61d3f/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_61d3f.dir/build.make CMakeFiles/cmTC_61d3f.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_61d3f.dir/feature_tests.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc   -std=c11 -o CMakeFiles/cmTC_61d3f.dir/feature_tests.c.o   -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_61d3f
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_61d3f.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc      -rdynamic CMakeFiles/cmTC_61d3f.dir/feature_tests.c.o  -o cmTC_61d3f 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_16cf1/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_16cf1.dir/build.make CMakeFiles/cmTC_16cf1.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_16cf1.dir/feature_tests.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc   -std=c99 -o CMakeFiles/cmTC_16cf1.dir/feature_tests.c.o   -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_16cf1
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16cf1.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc      -rdynamic CMakeFiles/cmTC_16cf1.dir/feature_tests.c.o  -o cmTC_16cf1 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_6b10e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_6b10e.dir/build.make CMakeFiles/cmTC_6b10e.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6b10e.dir/feature_tests.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc   -std=c90 -o CMakeFiles/cmTC_6b10e.dir/feature_tests.c.o   -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_6b10e
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6b10e.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc      -rdynamic CMakeFiles/cmTC_6b10e.dir/feature_tests.c.o  -o cmTC_6b10e 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_b8f46/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_b8f46.dir/build.make CMakeFiles/cmTC_b8f46.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b8f46.dir/testCXXCompiler.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper     -o CMakeFiles/cmTC_b8f46.dir/testCXXCompiler.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_b8f46
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b8f46.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_b8f46.dir/testCXXCompiler.cxx.o  -o cmTC_b8f46 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_64031/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_64031.dir/build.make CMakeFiles/cmTC_64031.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper     -o CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o -c /projects/opt/ppc64le/cmake/3.12.4/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_64031
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64031.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper      -v -rdynamic CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_64031 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Using built-in specs.
+COLLECT_GCC=g++
+OFFLOAD_TARGET_NAMES=nvptx-none
+Target: powerpc64le-unknown-linux-gnu
+Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0
+Thread model: posix
+gcc version 9.2.0 (GCC) 
+COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc'
+ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/cc1plus -quiet -v -I . -I /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include -D_GNU_SOURCE -D FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c" -D REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c" -D __NV_EXTRA_INITIALIZATION= -D __NV_EXTRA_FINALIZATION= -D __CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__ -D __CUDACC_VER_MAJOR__=11 -D __CUDACC_VER_MINOR__=0 -D __CUDACC_VER_BUILD__=194 /usr/local/cuda-11.0/bin/crt/link.stub -quiet -dumpbase link.stub -auxbase-strip /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o -version -o /tmp/ccZha2Vi.s
+GNU C++14 (GCC) version 9.2.0 (powerpc64le-unknown-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../powerpc64le-unknown-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ .
+ /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include
+ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0
+ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0/powerpc64le-unknown-linux-gnu
+ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward
+ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/include
+ /usr/local/include
+ /projects/opt/ppc64le/p9/gcc/9.2.0/include
+ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++14 (GCC) version 9.2.0 (powerpc64le-unknown-linux-gnu)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: e88348bf2de57b9b5c8f74b0fb393a11
+COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc'
+ as -v -I . -I /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include -a64 -mppc64 -many -mlittle -o /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o /tmp/ccZha2Vi.s
+GNU assembler version 2.27 (ppc64le-redhat-linux) using BFD version version 2.27-44.base.el7
+COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/
+LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc'
+Using built-in specs.
+COLLECT_GCC=g++
+COLLECT_LTO_WRAPPER=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none
+Target: powerpc64le-unknown-linux-gnu
+Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0
+Thread model: posix
+gcc version 9.2.0 (GCC) 
+COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/
+LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib' '-o' 'cmTC_64031' '-shared-libgcc'
+ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2 -plugin /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so -plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cci8xU4h.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -V -m elf64lppc -export-dynamic -dynamic-linker /lib64/ld64.so.2 -o cmTC_64031 /lib/../lib64/crt1.o /lib/../lib64/crti.o /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o -L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs -L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../.. --start-group /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o -lcudadevrt -lcudart_static -lrt -lpthread -ldl --end-group -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o /lib/../lib64/crtn.o
+GNU ld version 2.27-44.base.el7
+  Supported emulations:
+   elf64lppc
+   elf32ppc
+   elf32ppclinux
+   elf32ppcsim
+   elf32lppc
+   elf32lppclinux
+   elf32lppcsim
+   elf64ppc
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib' '-o' 'cmTC_64031' '-shared-libgcc'
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_64031/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_64031.dir/build.make CMakeFiles/cmTC_64031.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper     -o CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o -c /projects/opt/ppc64le/cmake/3.12.4/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).]
+  ignore line: [Linking CXX executable cmTC_64031]
+  ignore line: [/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64031.dir/link.txt --verbose=1]
+  ignore line: [/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper      -v -rdynamic CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_64031 ]
+  ignore line: [nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=g++]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+  ignore line: [Target: powerpc64le-unknown-linux-gnu]
+  ignore line: [Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.0 (GCC) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc']
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/cc1plus -quiet -v -I . -I /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include -D_GNU_SOURCE -D FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c" -D REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c" -D __NV_EXTRA_INITIALIZATION= -D __NV_EXTRA_FINALIZATION= -D __CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__ -D __CUDACC_VER_MAJOR__=11 -D __CUDACC_VER_MINOR__=0 -D __CUDACC_VER_BUILD__=194 /usr/local/cuda-11.0/bin/crt/link.stub -quiet -dumpbase link.stub -auxbase-strip /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o -version -o /tmp/ccZha2Vi.s]
+  ignore line: [GNU C++14 (GCC) version 9.2.0 (powerpc64le-unknown-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../powerpc64le-unknown-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ .]
+  ignore line: [ /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0/powerpc64le-unknown-linux-gnu]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/include]
+  ignore line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/include-fixed]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++14 (GCC) version 9.2.0 (powerpc64le-unknown-linux-gnu)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: e88348bf2de57b9b5c8f74b0fb393a11]
+  ignore line: [COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc']
+  ignore line: [ as -v -I . -I /usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include -a64 -mppc64 -many -mlittle -o /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o /tmp/ccZha2Vi.s]
+  ignore line: [GNU assembler version 2.27 (ppc64le-redhat-linux) using BFD version version 2.27-44.base.el7]
+  ignore line: [COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-c' '-D' 'FATBINFILE="/tmp/tmpxft_00013210_00000000-4_cmTC_64031_dlink.fatbin.c"' '-D' 'REGISTERLINKBINARYFILE="/tmp/tmpxft_00013210_00000000-3_cmTC_64031_dlink.reg.c"' '-I' '.' '-D' '__NV_EXTRA_INITIALIZATION=' '-D' '__NV_EXTRA_FINALIZATION=' '-D' '__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__' '-v' '-rdynamic' '-I' '/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/include' '-D' '__CUDACC_VER_MAJOR__=11' '-D' '__CUDACC_VER_MINOR__=0' '-D' '__CUDACC_VER_BUILD__=194' '-o' '/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o' '-shared-libgcc']
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+  ignore line: [Target: powerpc64le-unknown-linux-gnu]
+  ignore line: [Configured with: ../gcc-9.2.0/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=/usr/local/cuda-10.1/include --with-cuda-driver-lib=/usr/local/cuda-10.1/lib64 --disable-bootstrap --disable-multilib --enable-languages=c,c++,fortran,lto --prefix=/projects/opt/ppc64le/p9/gcc/9.2.0]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs' '-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib' '-o' 'cmTC_64031' '-shared-libgcc']
+  link line: [ /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2 -plugin /projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so -plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cci8xU4h.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -V -m elf64lppc -export-dynamic -dynamic-linker /lib64/ld64.so.2 -o cmTC_64031 /lib/../lib64/crt1.o /lib/../lib64/crti.o /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o -L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs -L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../.. --start-group /tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o -lcudadevrt -lcudart_static -lrt -lpthread -ldl --end-group -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o /lib/../lib64/crtn.o]
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/projects/opt/ppc64le/p9/gcc/9.2.0/libexec/gcc/powerpc64le-unknown-linux-gnu/9.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cci8xU4h.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-V] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf64lppc] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_64031] ==> ignore
+    arg [/lib/../lib64/crt1.o] ==> ignore
+    arg [/lib/../lib64/crti.o] ==> ignore
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtbegin.o] ==> ignore
+    arg [-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs] ==> dir [/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs]
+    arg [-L/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib] ==> dir [/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib]
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0]
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..] ==> dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..]
+    arg [--start-group] ==> ignore
+    arg [/tmp/tmpxft_00013210_00000000-6_cmTC_64031_dlink.o] ==> ignore
+    arg [CMakeFiles/cmTC_64031.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lcudadevrt] ==> lib [cudadevrt]
+    arg [-lcudart_static] ==> lib [cudart_static]
+    arg [-lrt] ==> lib [rt]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-ldl] ==> lib [dl]
+    arg [--end-group] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/crtend.o] ==> ignore
+    arg [/lib/../lib64/crtn.o] ==> ignore
+  collapse library dir [/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib/stubs] ==> [/usr/local/cuda-11.0/targets/ppc64le-linux/lib/stubs]
+  collapse library dir [/usr/local/cuda-11.0/bin/../targets/ppc64le-linux/lib] ==> [/usr/local/cuda-11.0/targets/ppc64le-linux/lib]
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0]
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../../../lib64] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0/../../..] ==> [/projects/opt/ppc64le/p9/gcc/9.2.0/lib]
+  implicit libs: [cudadevrt;cudart_static;rt;pthread;dl;stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/usr/local/cuda-11.0/targets/ppc64le-linux/lib/stubs;/usr/local/cuda-11.0/targets/ppc64le-linux/lib;/projects/opt/ppc64le/p9/gcc/9.2.0/lib/gcc/powerpc64le-unknown-linux-gnu/9.2.0;/projects/opt/ppc64le/p9/gcc/9.2.0/lib64;/lib64;/usr/lib64;/projects/opt/ppc64le/p9/gcc/9.2.0/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++2a] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_10262/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_10262.dir/build.make CMakeFiles/cmTC_10262.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_10262.dir/feature_tests.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper    -std=c++2a -o CMakeFiles/cmTC_10262.dir/feature_tests.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.cxx
+nvcc_wrapper does not accept standard flags -std=c++2a since partial standard flags and standards after C++17 are not supported. nvcc_wrapper will use -std=c++14 instead. It is undefined behavior to use this flag. This should only be occurring during CMake configuration.
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_10262
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_10262.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_10262.dir/feature_tests.cxx.o  -o cmTC_10262 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++17] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_faac8/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_faac8.dir/build.make CMakeFiles/cmTC_faac8.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_faac8.dir/feature_tests.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper    -std=c++17 -o CMakeFiles/cmTC_faac8.dir/feature_tests.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.cxx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_faac8
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_faac8.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_faac8.dir/feature_tests.cxx.o  -o cmTC_faac8 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_f7f6f/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_f7f6f.dir/build.make CMakeFiles/cmTC_f7f6f.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f7f6f.dir/feature_tests.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper    -std=c++14 -o CMakeFiles/cmTC_f7f6f.dir/feature_tests.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.cxx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_f7f6f
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f7f6f.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_f7f6f.dir/feature_tests.cxx.o  -o cmTC_f7f6f 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_3ae15/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_3ae15.dir/build.make CMakeFiles/cmTC_3ae15.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3ae15.dir/feature_tests.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper    -std=c++11 -o CMakeFiles/cmTC_3ae15.dir/feature_tests.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.cxx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_3ae15
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ae15.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_3ae15.dir/feature_tests.cxx.o  -o cmTC_3ae15 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_f9570/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_f9570.dir/build.make CMakeFiles/cmTC_f9570.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f9570.dir/feature_tests.cxx.o
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper    -std=c++98 -o CMakeFiles/cmTC_f9570.dir/feature_tests.cxx.o -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/feature_tests.cxx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Linking CXX executable cmTC_f9570
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9570.dir/link.txt --verbose=1
+/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/Kokkos/kokkos/bin/nvcc_wrapper       -rdynamic CMakeFiles/cmTC_f9570.dir/feature_tests.cxx.o  -o cmTC_f9570 
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_e3028/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_e3028.dir/build.make CMakeFiles/cmTC_e3028.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e3028.dir/CheckIncludeFile.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc    -o CMakeFiles/cmTC_e3028.dir/CheckIncludeFile.c.o   -c /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_e3028
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3028.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc      -rdynamic CMakeFiles/cmTC_e3028.dir/CheckIncludeFile.c.o  -o cmTC_e3028 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_2891a/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_2891a.dir/build.make CMakeFiles/cmTC_2891a.dir/build
+gmake[1]: Entering directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2891a.dir/CheckFunctionExists.c.o
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2891a.dir/CheckFunctionExists.c.o   -c /projects/opt/ppc64le/cmake/3.12.4/share/cmake-3.12/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2891a
+/projects/opt/ppc64le/cmake/3.12.4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2891a.dir/link.txt --verbose=1
+/projects/opt/ppc64le/p9/gcc/9.2.0/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2891a.dir/CheckFunctionExists.c.o  -o cmTC_2891a -lpthread 
+gmake[1]: Leaving directory `/home/ddunning/Cercion/cercion_serial/Elements_examples/Laplacian/build/CMakeFiles/CMakeTmp'
+
+

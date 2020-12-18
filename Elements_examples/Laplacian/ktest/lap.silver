@@ -1,0 +1,274 @@
+This is the 1st description line of the EnSight Gold geometry example
+This is the 2nd description line of the EnSight Gold geometry example
+node id assign
+element id assign
+part
+         1
+Mesh
+coordinates
+27
+Num points read in = 27
+
+hexa8
+Num elements read in 8
+before initial mesh initialization
+Before initial mesh connectivity
+Ragged check cinls
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 
+Ragged check cinls2
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 
+ragged check cicls
+1 2 3 4 5 6 7 0 2 3 4 5 6 7 0 1 3 4 6 5 7 0 1 2 4 5 6 7 0 1 5 2 6 3 7 0 1 4 2 3 6 7 0 2 4 1 3 5 7 0 1 2 3 4 5 6 
+refine mesh
+Min_dist = 1
+Hash dist = 0.142857
+Gauss_in_cell check
+0 1 2 3 4 5 6 7 0-0 8 9 10 11 12 13 14 15 1-1 16 17 18 19 20 21 22 23 2-2 24 25 26 27 28 29 30 31 3-3 32 33 34 35 36 37 38 39 4-4 40 41 42 43 44 45 46 47 5-5 48 49 50 51 52 53 54 55 6-6 56 57 58 59 60 61 62 63 7-7 
+Nodes_in_cell check
+0 1 2 3 4 5 6 7 1 8 3 9 5 10 7 11 2 3 12 13 6 7 14 15 3 9 13 16 7 11 15 17 4 5 6 7 18 19 20 21 5 10 7 11 19 22 21 23 6 7 14 15 20 21 24 25 7 11 15 17 21 23 25 26 
+Ragged check cinls
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 
+Ragged check cinls2
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 
+ragged check cicls
+1 2 3 4 5 6 7 0 2 3 4 5 6 7 0 1 3 4 6 5 7 0 1 2 4 5 6 7 0 1 5 2 6 3 7 0 1 4 2 3 6 7 0 2 4 1 3 5 7 0 1 2 3 4 5 6 
+Ragged check einls
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 
+ragged check
+1 2 3 4 5 6 7 0 2 3 4 5 6 7 0 1 3 4 6 5 7 0 1 2 4 5 6 7 0 1 5 2 6 3 7 0 1 4 2 3 6 7 0 2 4 1 3 5 7 0 1 2 3 4 5 6 
+number of faces = 36
+End of setup 
+Num elements = 8
+number of boundary faces = 24
+building boundary sets 
+tagging x = 0 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+tagging y = 0 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+tagging z = 0 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+tagging x = 2 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+tagging y = 2 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+tagging z = 2 
+ tagged boundary faces 
+tagged a set 
+number of bdy faces in this set = 4
+
+Allocate and Initialize
+RK num stages = 2
+Node state allocated and initialized to zero
+
+Material point state allocated and initialized to zero
+
+Before fill instructions
+After fill instructions
+Before boundary  
+::::  Getting partials of basis  ::::
+Num Basis =  8
+Local Node =  0
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  1
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  2
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  3
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  4
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  5
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+Partial xi = -0
+Partial xi = 0
+
+Local Node =  6
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+
+Local Node =  7
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0
+Partial xi = 0
+Partial xi = -0.5
+Partial xi = 0.5
+
+Finished gradient vector
+Percent complete = 2.00 
+****************Graphics write*************** 
+Percent complete = 4.00 
+****************Graphics write*************** 
+Percent complete = 6.00 
+****************Graphics write*************** 
+Percent complete = 8.00 
+****************Graphics write*************** 
+Percent complete = 10.00 
+Step = 50   dt = 1.000000e-03  time = 5.000000e-02  
+ ****************Graphics write*************** 
+Percent complete = 12.00 
+****************Graphics write*************** 
+Percent complete = 14.00 
+****************Graphics write*************** 
+Percent complete = 16.00 
+****************Graphics write*************** 
+Percent complete = 18.00 
+****************Graphics write*************** 
+Percent complete = 20.00 
+Step = 100   dt = 1.000000e-03  time = 1.000000e-01  
+ ****************Graphics write*************** 
+Percent complete = 22.00 
+****************Graphics write*************** 
+Percent complete = 24.00 
+****************Graphics write*************** 
+Percent complete = 26.00 
+****************Graphics write*************** 
+Percent complete = 28.00 
+****************Graphics write*************** 
+Percent complete = 30.00 
+Step = 150   dt = 1.000000e-03  time = 1.500000e-01  
+ ****************Graphics write*************** 
+Percent complete = 32.00 
+****************Graphics write*************** 
+Percent complete = 34.00 
+****************Graphics write*************** 
+Percent complete = 36.00 
+****************Graphics write*************** 
+Percent complete = 38.00 
+****************Graphics write*************** 
+Percent complete = 40.00 
+Step = 200   dt = 1.000000e-03  time = 2.000000e-01  
+ ****************Graphics write*************** 
+Percent complete = 42.00 
+****************Graphics write*************** 
+Percent complete = 44.00 
+****************Graphics write*************** 
+Percent complete = 46.00 
+****************Graphics write*************** 
+Percent complete = 48.00 
+****************Graphics write*************** 
+Percent complete = 50.00 
+Step = 250   dt = 1.000000e-03  time = 2.500000e-01  
+ ****************Graphics write*************** 
+Percent complete = 52.00 
+****************Graphics write*************** 
+Percent complete = 54.00 
+****************Graphics write*************** 
+Percent complete = 56.00 
+****************Graphics write*************** 
+Percent complete = 58.00 
+****************Graphics write*************** 
+Percent complete = 60.00 
+Step = 300   dt = 1.000000e-03  time = 3.000000e-01  
+ ****************Graphics write*************** 
+Percent complete = 62.00 
+****************Graphics write*************** 
+Percent complete = 64.00 
+****************Graphics write*************** 
+Percent complete = 66.00 
+****************Graphics write*************** 
+Percent complete = 68.00 
+****************Graphics write*************** 
+Percent complete = 70.00 
+Step = 350   dt = 1.000000e-03  time = 3.500000e-01  
+ ****************Graphics write*************** 
+Percent complete = 72.00 
+****************Graphics write*************** 
+Percent complete = 74.00 
+****************Graphics write*************** 
+Percent complete = 76.00 
+****************Graphics write*************** 
+Percent complete = 78.00 
+****************Graphics write*************** 
+Percent complete = 80.00 
+Step = 400   dt = 1.000000e-03  time = 4.000000e-01  
+ ****************Graphics write*************** 
+Percent complete = 82.00 
+****************Graphics write*************** 
+Percent complete = 84.00 
+****************Graphics write*************** 
+Percent complete = 86.00 
+****************Graphics write*************** 
+Percent complete = 88.00 
+****************Graphics write*************** 
+Percent complete = 90.00 
+Step = 450   dt = 1.000000e-03  time = 4.500000e-01  
+ ****************Graphics write*************** 
+Percent complete = 92.00 
+****************Graphics write*************** 
+Percent complete = 94.00 
+****************Graphics write*************** 
+Percent complete = 96.00 
+****************Graphics write*************** 
+Percent complete = 98.00 
+****************Graphics write*************** 
+Percent complete = 100.00 
+End of Main file
