@@ -54,6 +54,11 @@ num_cells in element = (p_order*2)^3
 #include <sys/stat.h>
 #include <cstdlib>  // for killing the code with std::exit
 
+// Save the current gcc diagnostic state
+#pragma GCC diagnostic push
+// Silence warnings about not using results we don't care about
+// (e.g. from fscanf, system)
+#pragma GCC diagnostic ignored "-Wunused-result"
 
 void read_mesh(char *MESH);
 
@@ -1113,7 +1118,7 @@ void ensight(){
 
     
     FILE *out[20];   // the output files that are written to
-    char filename[128];
+    char filename[200];
     
     struct stat st;
     
@@ -1290,3 +1295,6 @@ void ensight(){
     // increment graphics id counter
     graphics_id++;
 } // end ensight
+
+// Restore the gcc diagnostic state
+#pragma GCC diagnostic pop

@@ -1,6 +1,9 @@
 add_library(
   elements
     elements.cpp
+    elements2D.cpp
+    elements3D.cpp
+    elements4D.cpp
     lagrange_polynomials.cpp
     lagrange_element.cpp
     legendre_polynomials.cpp

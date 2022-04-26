@@ -3,6 +3,7 @@
 #include "common/common.h"
 
 namespace jacobi {
+  
   /* Recurrence relation parameters */
   inline Real a(Real alpha, Real beta, int n) {
     if (n == 1) return 0.5*(alpha + beta) + 1.0;
@@ -32,4 +33,5 @@ namespace jacobi {
   template <typename NumType>
   NumType eval_der(const int n, const int k, const Real alpha, 
       const Real beta, const NumType X);
+
 }
