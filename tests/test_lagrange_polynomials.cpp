@@ -95,11 +95,11 @@ bool test1(TestParams<Real> &p) {
   Real sum1 = 0.0;
 
   for (SizeType i = 0; i < p.Nv; i++) {
-    Real li = lagrange::eval(p.Nv, i, -1, p.Z, p.w, p.X);
+    Real li = lagrange::eval(p.Nv, i, p.Nv, p.Z, p.w, p.X);
     sum1 += p.c[i]*li;
   }
 
-  Real sum2 = lagrange::eval_interp(p.Nv, -1, p.Z, p.w, p.X, p.c);
+  Real sum2 = lagrange::eval_interp(p.Nv, p.Nv, p.Z, p.w, p.X, p.c);
 
   Real rel_error = common::abs((sum1 - sum2)/sum1);
 
@@ -152,12 +152,12 @@ bool test2(TestParams<Real> &p) {
   Real sum1 = 0.0;
 
   for (SizeType i = 0; i < p.Nv; i++) {
-    Real dli = lagrange::eval_der(p.Nv, 1, i, -1, p.Z, p.w, p.X, p.C);
+    Real dli = lagrange::eval_der(p.Nv, 1, i, p.Nv, p.Z, p.w, p.X, p.C);
     sum1 += p.c[i]*dli;
   }
 
   std::copy(p.c, p.c+p.Nv, p.C);
-  Real sum2 = lagrange::eval_der_interp(p.Nv, 1, -1, p.Z, p.w, p.X, p.C);
+  Real sum2 = lagrange::eval_der_interp(p.Nv, 1, p.Nv, p.Z, p.w, p.X, p.C);
 
   Real rel_error = common::abs((sum1 - sum2)/sum1);
 
@@ -212,11 +212,11 @@ bool test3(TestParams<Complex> &p) {
 
   std::copy(p.c, p.c+p.Nv, p.C);
   Real df = common::real(
-      lagrange::eval_der_interp(p.Nv, 1, -1, p.Z, p.w, p.X, p.C));
+      lagrange::eval_der_interp(p.Nv, 1, p.Nv, p.Z, p.w, p.X, p.C));
 
   std::copy(p.c, p.c+p.Nv, p.C);
   Complex X = p.X + Complex(0, h);  // complex perturbation
-  Complex f_cs = lagrange::eval_interp(p.Nv, -1, p.Z, p.w, X, p.C);
+  Complex f_cs = lagrange::eval_interp(p.Nv, p.Nv, p.Z, p.w, X, p.C);
   Real df_cs = common::imag(f_cs)/h;
 
   Real rel_error = common::abs((df - df_cs)/df_cs);

@@ -1,5 +1,7 @@
 #include "lagrange_polynomials.h"
 
+#include <algorithm>
+
 namespace lagrange {
   /*
    * If the input coordinate is coincident with any of the input vertices,
@@ -12,25 +14,40 @@ namespace lagrange {
    * implementation of barycentric Lagrange interpolation. I'm not sure what to
    * do
    *
+   * 
+   * @NOTE: [2023-08-14:emc] If anyone ever decided to change SizeType
+   * from an unsigned to a signed integer value, this function will
+   * return -1 instead of MAX_INT. This would be a problem for the
+   * down-stream code (mostly in the Lagrange evaluation functions)
+   * which are checking to see if this function returns an integer
+   * less than N.
+   *
+   * [2023-08-14:emc] Updated to use the std::find algorithm. This
+   * eliminates the compiler warning and potentially undefined
+   * behavior for assigning -1 to an SizeType. This also opens up the
+   * possibility for the find algorithm to potentially be vectorized
+   * or parallelized if supported by the std-library sometime in the
+   * future. I've checked the downstream code (mostly in the test
+   * cases, and the evaluation methods should not notice any adverse
+   * behavior. The downstream methods are checking to see if this
+   * function returns a value less than N. So the same behavior will
+   * result whether returning -1 as MAXINT, or N (If std::find fails,
+   * it returns the pointer/iterator at the end of the list. So, the
+   * return value is: (z+N)-z = N.)
+   *
    * Parameters
    * ----------
-   * N : number of vertices
-   * z : vertex coordinates
-   * x : coordinate to test
+   * @param N : number of vertices
+   * @param Z : vertex coordinates
+   * @param X : coordinate to test
+   *
+   * @return Index of the control point in Z that matches the query X
    */
   template <typename NumType>
-  SizeType find_coincident_vertex(const SizeType &N, const NumType *z, 
-      const NumType &x) {
-    // The largest number an unsigned integer can be
-    SizeType k = -1;
-
-    // Adding to -1 in unsigned rolls over zero
-    for (SizeType j = 0; j < N; j++) {
-      //k += (j + 1)*SizeType(z[j] - x == 0.0);
-      k += (j + 1)*SizeType(common::almost_equal(z[j], x));
-    }
-
-    return k;
+  SizeType find_coincident_vertex(const SizeType & N,
+                                  const NumType * Z, 
+                                  const NumType & X) {
+    return SizeType(std::find(Z, Z+N, X) - Z);
   }
 
   /*
@@ -54,8 +71,9 @@ namespace lagrange {
    * cannot and do not scale the weights 
    */
   template <typename NumType>
-  void compute_barycentric_weights(const SizeType &N, const NumType *z, 
-      NumType *w) {
+  void compute_barycentric_weights(const SizeType &N,
+                                   const NumType *z, 
+                                   NumType *w) {
     // Compute weights
     for (SizeType j = 0; j < N; j++) {
       w[j] = 1.0;
@@ -74,7 +92,7 @@ namespace lagrange {
    * ----------
    * Nv : number of vertices
    * i  : index of vertex
-   * ic : index of vertex coincident with X (-1 if not coincident)
+   * ic : index of vertex coincident with X (Nv if not coincident)
    * Z  : vertex coordinates
    * w  : barycentric weights
    * X  : coordinate at which to evaluate
@@ -104,7 +122,7 @@ namespace lagrange {
    * Nv         : number of vertices
    * n          : order of derivative
    * i          : index of vertex
-   * ic : index of vertex coincident with X (-1 if not coincident)
+   * ic : index of vertex coincident with X (Nv if not coincident)
    * Z          : vertex coordinates
    * w          : barycentric weights
    * X          : coordinate at which to evaluate
@@ -137,7 +155,7 @@ namespace lagrange {
    * Parameters
    * ----------
    * Nv : number of vertices 
-   * i  : index of vertex coincident with coordinate (-1 if not coincident)
+   * i  : index of vertex coincident with coordinate (Nv if not coincident)
    * Z  : vertex coordinates
    * w  : barycentric vertex weights
    * X  : coordinate at which to evaluate interpolant
@@ -183,7 +201,7 @@ namespace lagrange {
    * ----------
    * Nv : number of vertices 
    * n  : order of derivative
-   * i  : index of vertex coincident with coordinate (-1 if not coincident)
+   * i  : index of vertex coincident with coordinate (Nv if not coincident)
    * Z  : vertex coordinates
    * w  : barycentric vertex weights
    * X  : coordinate at which to eval interpolant
